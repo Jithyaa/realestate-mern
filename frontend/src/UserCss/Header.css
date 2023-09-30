@@ -1,0 +1,20 @@
+/* Add this to your CSS file */
+.header-link {
+    margin-right: 10px; /* Add margin for spacing */
+    font-family: 'Roboto', sans-serif; /* Change the font family */
+    font-size: 13px; /* Change the font size */
+    color: #e7e7f3; /* Change the font color */
+    text-decoration: none; /* Remove underlines */
+  }
+  
+  .header-link:hover {
+    color: #23a2f6; /* Change color on hover */
+  }
+  .custom-navbar {
+    height: 68px; /* Adjust the height as needed */
+    background-color: rgba(32, 40, 129, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
