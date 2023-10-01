@@ -76,3 +76,17 @@ export const createResidency=async(data,token)=>{
         throw error;
     }
 }
+
+export const bookVisit = async(date,propertyId,email)=>{
+    try {
+        await api.post(`/user/bookVisit/${propertyId}`),
+        {
+            email,
+            id:propertyId,
+            date:dayjs(date).format("DD/MM/YYYY")
+        }
+    } catch (error) {
+        toast.error("something went wrong , please try again");
+        throw error
+    } 
+}

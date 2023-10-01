@@ -48,14 +48,14 @@ const Header = () => {
                   <Nav.Link href='/properties' className='header-link'>
                     Residencies
                   </Nav.Link>
-                  <Nav.Link href='/buy' className='header-link'>
+                  {/* <Nav.Link href='/buy' className='header-link'>
                     Buy
                   </Nav.Link>
                   <Nav.Link href='/rent' className='header-link'>
                     Rent
-                  </Nav.Link>
+                  </Nav.Link> */}
                   <Nav.Link href='' className='header-link' onClick={handleAddPropertyClick}>
-                    Sell
+                    Add your Property
                   </Nav.Link>
                   <AddPropertyModal
                     opened={modalOpened}

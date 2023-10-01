@@ -2,13 +2,14 @@
 .header-link {
     margin-right: 10px; /* Add margin for spacing */
     font-family: 'Roboto', sans-serif; /* Change the font family */
-    font-size: 13px; /* Change the font size */
-    color: #e7e7f3; /* Change the font color */
-    text-decoration: none; /* Remove underlines */
+    font-size: 20px; /* Change the font size */
+    color: #d4d4eb; /* Change the font color */
+    text-decoration: none; 
   }
   
   .header-link:hover {
-    color: #23a2f6; /* Change color on hover */
+    color: #23a2f6;
+    text-decoration: none; /* Remove underline on hover */
   }
   .custom-navbar {
     height: 68px; /* Adjust the height as needed */
@@ -16,5 +17,15 @@
     position: sticky;
     top: 0;
     z-index: 100;
+  }
+  .navbar-brand {
+    text-decoration: none; /* Remove underline from the Navbar.Brand */
+    font-size: 25px; /* Set the font size */
+    font-weight: bold; /* Set the font weight */
+  }
+  
+  /* Style the Navbar.Brand on hover */
+  .navbar-brand:hover {
+    text-decoration: none; /* Remove underline on hover */
   }
   

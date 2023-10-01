@@ -2,7 +2,7 @@
     background-image: url('https://static.rdc.moveaws.com/images/hero/default/2021-11/webp/hp-hero-desktop-xl.webp'); /* Specify the correct path to your background image */
     background-size: cover;
     background-position: center;
-    height: 60vh; /* Adjust the height as needed */
+    height: 70vh; /* Adjust the height as needed */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,22 +11,21 @@
    
   }
   .hero-text {
-    position: absolute; /* Set the text to absolute positioning */
-    top: 29%; /* Adjust vertical positioning as needed */
-    left: 50%; /* Adjust horizontal positioning as needed */
-    transform: translate(-50%, -50%); /* Center the text within its container */
-    font-size: 44px; /* Adjust the font size as needed */
-    color: #fff; /* Text color */
-    /* background-color: rgba(0, 0, 0, 0.5); Background color with transparency */
-    padding: 10px 20px; /* Adjust padding as needed */
-    border-radius: 5px; /* Add rounded corners if desired */
+    position: absolute;
+    top: 40%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+    text-align: center; /* Center text within the container */
+    font-size: 44px;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
   }
   
-.hero-subtext {
-    font-size: 18px; /* Your desired font size */
-    font-weight: bold; /* Your desired font weight */
-    color: #fff; /* Your desired text color */
-    /* Add any other styles you want */
+  .hero-subtext {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
   }
   .search-bar{
     background-color: #fff;

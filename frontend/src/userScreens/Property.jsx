@@ -12,18 +12,20 @@ import { FaShower } from 'react-icons/fa';
 import Map from '../components/Map/Map.jsx';
 import BookingModal from '../components/BookingModal/BookingModal.jsx';
 import Heart from '../components/Heart/Heart';
+import { userApiSlice } from '../slices/usersApiSlices';
 
 
 
 const Property = () => {
   const { pathname } = useLocation()
   const id = pathname.split("/").slice(-1)[0]
-  const { data, isLoading, isError } = useQuery(["residency", id], () =>
+  const { data, isLoading, isError } = useQuery(["resd", id], () =>
     getProperty(id)
   );
 
   const { userInfo } = useSelector((state) => state.auth);
   const [modalOpened, setModalOpened] = useState(false)
+  // const {useLoginMutation} = userApiSlice()
 
 
 
@@ -45,7 +47,7 @@ const Property = () => {
         </div>
       </div>
 
-    )
+    ) 
   }
 
   return (

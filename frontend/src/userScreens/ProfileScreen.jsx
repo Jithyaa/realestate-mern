@@ -3,11 +3,12 @@ import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch ,useSelector} from 'react-redux';
 import {Form,Button } from 'react-bootstrap';
-// import FormContainer from '../components/FormContainer';
+import FormContainer from '../components/FormContainer';
 import {toast} from 'react-toastify'
 import Loader from '../components/Loader';
 import { setCredentials } from '../slices/authSlice';
 import { useUpdateUserMutation } from '../slices/usersApiSlices';
+
 
 const ProfileScreen = () => {
     const [name,setName]=useState('');
@@ -20,7 +21,7 @@ const ProfileScreen = () => {
     const dispatch= useDispatch();
 
     const {userInfo}= useSelector((state)=>state.auth)
-    const [updateProfile,{isLoading}] = useUpdateUserMutation
+    const [updateProfile,{isLoading}] = useUpdateUserMutation()
  
 
     useEffect(()=>{
