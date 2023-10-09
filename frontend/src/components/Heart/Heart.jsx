@@ -12,7 +12,7 @@ const Heart = ({ id }) => {
   const dispatch = useDispatch();
 
   // Access user info from Redux state
-  const userInfo = useSelector((state) => state.auth.userInfo);
+  const userInfo = useSelector((state) => state.auth);
 
   const { mutate } = useMutation({
     mutationFn: () =>

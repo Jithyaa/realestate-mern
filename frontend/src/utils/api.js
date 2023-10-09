@@ -77,16 +77,24 @@ export const createResidency=async(data,token)=>{
     }
 }
 
-export const bookVisit = async(date,propertyId,email)=>{
+export const bookVisit = async (date, propertyId, email, token,timeSlots) => {
     try {
-        await api.post(`/user/bookVisit/${propertyId}`),
+      await api.post(
+        `/user/bookVisit/${propertyId}`,
         {
-            email,
-            id:propertyId,
-            date:dayjs(date).format("DD/MM/YYYY")
+          email,
+          id: propertyId,
+          date: dayjs(date).format("DD/MM/YYYY"),
+          timeSlots:timeSlots
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
+      );
     } catch (error) {
-        toast.error("something went wrong , please try again");
-        throw error
-    } 
-}
+      toast.error("Something went wrong, Please try again");
+      throw error;
+    }
+  };

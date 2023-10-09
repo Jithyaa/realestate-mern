@@ -1,0 +1,36 @@
+.rental-container {
+  background-image: url('https://images.livemint.com/img/2021/02/09/1600x900/buying-new-house-concept_35034-364_1612868223223_1612868239112.jpg');
+  background-size: cover;
+  height: 320px;
+  width: 600px;
+  padding: 20px;
+  opacity: 0.8;
+  margin-top: 2rem;
+  position: absolute;
+  top: 3.5rem;
+  right: 2.5rem;
+  border-radius: 10px;
+}
+
+.left-div {
+  flex: 1;
+  text-align: left;
+  padding: 20px;
+  margin-top: 90px;
+  margin-left: 1.9rem;
+}
+
+.center-container {
+  gap: 3rem;
+  background: rgb(243, 243, 247);
+  padding: 3rem;
+  border-radius: 8px;
+  border: 2px solid #2c2d2e52;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

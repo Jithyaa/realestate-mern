@@ -268,7 +268,8 @@ const resetPassword = asyncHandler(async (req, res) => {
 // book visit to residency //
 
 const bookvisit = asyncHandler(async (req, res) => {
-  const { email, date } = req.body
+  const { email, date, timeSlots } = req.body
+  console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhh",req.body)
   const { id } = req.params;
 
   try {
@@ -279,7 +280,7 @@ const bookvisit = asyncHandler(async (req, res) => {
     } else {
       await User.updateOne(
         { email: email },
-        { $push: { bookedVisits: { id, date } } }
+        { $push: { bookedVisits: { id, date,timeSlots } } }
       ).exec();
       res.send("Your visit is booked successfully");
     }

@@ -8,6 +8,7 @@ import ForgotPassword from '../userScreens/ForgotPassword.jsx'
 import ForgotOtp from "../userScreens/ForgotOtp.jsx";
 import ResetPassword from "../userScreens/ResetPassword.jsx";
 import OtpVerification from '../userScreens/OtpVerification.jsx';
+import RentalTools from '../userScreens/RentalTools.jsx'
 import Properties from '../userScreens/Properties.jsx';
 import { QueryClient, QueryClientProvider } from "react-query";
 import Property from "../userScreens/Property.jsx";
@@ -36,7 +37,7 @@ const UserRoutes = () => {
                     <Route path="/forgot-otp" element={<ForgotOtp />} />
                     <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/otp-verification" element={<OtpVerification />} />
-                    {/* <Route path="/residencies" element={<Residencies/>}/> */}
+                    <Route path="/rental-tools" element={<RentalTools/>}/>
                     <Route path="/" element={<Website/>}/>
                     <Route path="/properties" >
                         <Route index element={<Properties />} />

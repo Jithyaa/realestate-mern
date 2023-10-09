@@ -6,7 +6,9 @@ const createResidency = asyncHandler(async (req, res) => {
  
   try {
     const { title, description, price, address, country, city,
-      facilities, image, userEmail, type, timeSlots } = req.body.data
+      facilities, image, userEmail, type, timeSlots } = req.body.data;
+
+      let savedResidency;
 
     const newResidency = new Residency({
       title,
@@ -24,9 +26,10 @@ const createResidency = asyncHandler(async (req, res) => {
     });
     try {
       
-      const savedResidency = await newResidency.save();
+       savedResidency = await newResidency.save();
     } catch (error) {
       console.error('Error creating residency:', error);
+      throw new Error('Error creating residency');
     }
     
     
@@ -36,9 +39,9 @@ const createResidency = asyncHandler(async (req, res) => {
   } catch (err) {
     if (err.code === "P2002") {
       throw new Error("A residency with address already there")
+    }else{
+      res.status(500).json({ message: "Internal server error", error: err.message });
     }
-    throw new Error(err.message)
-
   }
 });
 
@@ -58,12 +61,14 @@ const getAllResidencies = asyncHandler(async(req,res)=>{
 
 const getResidency = asyncHandler(async(req,res)=>{
   const {id} = req.params;
+  console.log("fffffffffffffffff",id)
   try {
     const residency =await Residency.findById(id).exec();
     if(!residency){
       return res.status(404).json({message:"Residency not found"});
     }
-    res.json(residency);
+
+    res.send({...residency.toObject(),timeSlots:residency.timeSlots});
   } catch (err) {
     res.status(500).json({message:"Internal server error",error: err.message});
     

@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Modal, Select } from '@mantine/core';
-import { DateInput } from '@mantine/dates';
-import { useSelector } from 'react-redux';
-import { useMutation } from 'react-query';
-import { bookVisit } from '../../utils/api';
 import BookingModal from '../BookingModal/BookingModal.jsx'; 
 
 const Facilities = ({ propertyDetails, setPropertyDetails }) => {
@@ -13,7 +9,7 @@ const Facilities = ({ propertyDetails, setPropertyDetails }) => {
   };
   return (
     <div>
-      <Button onClick={openBookingModal}>Book Visit</Button>
+    
       <BookingModal
         opened={bookingModalOpened}
         setOpened={setBookingModalOpened}

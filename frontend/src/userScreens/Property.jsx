@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import { setCredentials } from '../slices/authSlice';
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { getProperty } from '../utils/api';
 import Loader from '../components/Loader';
@@ -16,18 +17,23 @@ import { userApiSlice } from '../slices/usersApiSlices';
 
 
 
+
 const Property = () => {
+  // const { propertyId } = useParams();
   const { pathname } = useLocation()
   const id = pathname.split("/").slice(-1)[0]
   const { data, isLoading, isError } = useQuery(["resd", id], () =>
     getProperty(id)
   );
+  console.log("heyyyyyyyyyyyyyyyyyyyyyy", data)
 
   const { userInfo } = useSelector((state) => state.auth);
   const [modalOpened, setModalOpened] = useState(false)
   // const {useLoginMutation} = userApiSlice()
 
-
+  // useEffect(() => {
+  //   // Fetch property details here if needed
+  // }, [propertyId]);
 
   if (isLoading) {
     return (
@@ -47,10 +53,11 @@ const Property = () => {
         </div>
       </div>
 
-    ) 
+    )
   }
 
   return (
+    
     <div className='wrapper'>
       <div className='flexColStart paddings innerWidth property-container'>
         <div className="like">
@@ -66,14 +73,14 @@ const Property = () => {
           {/* left */}
 
           <div className='flexColStart left'>
-            
+
 
             {/* head */}
 
             <div className='flexStart head'>
               <span className='primaryText'>{data?.title} </span>
               <span className='orangeText' style={{ fontSize: '1.5rem', marginLeft: '1.5rem' }}><b>Rs </b>{data?.price}</span>
-              <span className='secondaryText' style={{ fontSize: '1rem', marginLeft: '2.5rem', color:'#0a3ce4', fontWeight:'500' }}>{data?.type}</span>
+              <span className='secondaryText' style={{ fontSize: '1rem', marginLeft: '2.5rem', color: '#0a3ce4', fontWeight: '500' }}>{data?.type}</span>
 
             </div>
             {/* facilities */}
@@ -126,8 +133,9 @@ const Property = () => {
               setOpened={setModalOpened}
               propertyId={id}
               email={userInfo?.email}
-
+              propertyDetails={data?.timeSlots} // Pass the time slots here
             />
+
           </div>
 
           {/* right side */}
@@ -139,7 +147,7 @@ const Property = () => {
               country={data?.country}
             />
           </div>
-        
+
         </div>
       </div>
     </div>
