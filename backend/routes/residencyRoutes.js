@@ -11,6 +11,7 @@ router.get("/:id",getResidency)
 
 
 
+
 export default router;
 
 

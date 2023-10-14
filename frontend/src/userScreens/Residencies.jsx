@@ -1,36 +1,43 @@
-import React from 'react'
+import React from 'react';
 import useProperties from './useProperties';
 import PropertyCard from '../components/propertyCard/PropertyCard';
-import {Swiper,SwiperSlide,useSwiper} from 'swiper/react';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
 import Loader from '../components/Loader';
 import '../UserCss/Residencies.css';
 import { sliderSettings } from '../utils/common';
 
-
 const Residencies = () => {
-    const {data,isError,isLoading} = useProperties();
-    if (!data) {
-      return null; 
-    }
-    if(isError){
-     return(
+  const { data, isError, isLoading } = useProperties();
+  
+  if (isError) {
+    return (
       <div className='wrapper'>
         <span>Error while fetching data</span>
       </div>
-     )
-    }
-    if (isLoading) {
-      return <Loader />;
-    }
+    );
+  }
+  
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (!Array.isArray(data.residencies) || data.residencies.length === 0) {
+    return (
+      <div className='wrapper'>
+        <span>No properties found</span>
+      </div>
+    );
+  }
+
   return (
     <div id='residencies' className='r-wrapper'>
-        <div className='paddings innerWidth r-container'>
-            <div className='flexColStart r-head'>
-                <span className='orangeText'>Best Choices</span>
-                <span className='primaryText'>Popular Residencies</span>
-            </div>
-            <div className='property-card-container'>
-          {data.slice(0, 4).map((card, i) => (
+      <div className='paddings innerWidth r-container'>
+        <div className='flexColStart r-head'>
+          <span className='orangeText'>Best Choices</span>
+          <span className='primaryText'>Popular Residencies</span>
+        </div>
+        <div className='property-card-container'>
+          {data.residencies.slice(0, 4).map((card, i) => (
             <PropertyCard key={i} card={card} />
           ))}
         </div>
@@ -44,7 +51,9 @@ const Residencies = () => {
   );
 };
 
-export default Residencies
+export default Residencies;
+
+
 
 const SlideNextButton = () => {
     const swiper = useSwiper();

@@ -10,7 +10,7 @@ import Facilities from '../Facilities/Facilities.jsx';
 const AddPropertyModal = ({opened,setOpened}) => {
     const [active,setActive] = useState(0);
     const {userInfo} = useSelector((state) => state.auth);
-console.log("hjjkjkjjkjk",userInfo);
+    console.log("hjjkjkjjkjk",userInfo);
     const [propertyDetails,setPropertyDetails] = useState({
         title:"",
         description:"",
@@ -27,6 +27,7 @@ console.log("hjjkjkjjkjk",userInfo);
         type:"Buy",
         userEmail:userInfo?.email,
         timeSlots: [],
+        id:userInfo.userInfo?._id
        
     })
 

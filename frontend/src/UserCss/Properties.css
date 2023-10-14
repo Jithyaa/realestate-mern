@@ -19,3 +19,51 @@
 .properties-container .search-bar input{
     width: 70%;
 }
+/* Pagination container */
+.react-paginate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  /* Pagination controls (Previous and Next buttons) */
+  .pagination-previous,
+  .pagination-next {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 4px;
+    background-color: #007bff; /* Change the background color as needed */
+    color: #fff; /* Change the text color as needed */
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* Hover effect for pagination controls */
+  .pagination-previous:hover,
+  .pagination-next:hover {
+    background-color: #0056b3; /* Change the hover background color as needed */
+  }
+  
+  /* Active page number */
+  .pagination-page.selected {
+    background-color: #0056b3; /* Change the background color of the active page */
+    color: #fff; /* Change the text color of the active page */
+  }
+  
+  /* Page numbers */
+  .pagination-page {
+    display: inline-block;
+    margin: 0 4px;
+    font-size: 16px; /* Change the font size as needed */
+  }
+  
+  /* Disabled pagination controls (Previous and Next buttons) */
+  .pagination-previous.disabled,
+  .pagination-next.disabled {
+    opacity: 0.5; /* Adjust the opacity for disabled controls */
+    cursor: not-allowed;
+  }
+  

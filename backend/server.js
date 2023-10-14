@@ -18,16 +18,20 @@ import adminRoutes from './routes/adminRoutes.js'
 
 import residencyRoutes from './routes/residencyRoutes.js'
 
+import  morgan from "morgan";
+
 const app = express();
 
 app.use(cors({orgin:"http://localhost:3000",credentials:true}))
+
+app.use(morgan('tiny'));
 
 app.use(express.static('backend/public'))
 
 app.use(cookieParser());
 
 app.use(express.json());
-
+        
 app.use(express.urlencoded({extended:true}))
 
 app.use('/api/users',userRoutes);

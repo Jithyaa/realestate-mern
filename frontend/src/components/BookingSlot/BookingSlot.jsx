@@ -8,7 +8,8 @@ import { createResidency } from '../../utils/api';
 
 const BookingSlot = ({ prevStep, propertyDetails, setPropertyDetails, setOpened, setActiveStep }) => {
   const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
-
+  const userInfoId = useSelector((state)=>state.auth.userInfo._id);
+ 
   const handleTimeSlotSelection = (selectedTimeSlots) => {
     setSelectedTimeSlots(selectedTimeSlots);
   };
@@ -23,10 +24,11 @@ const BookingSlot = ({ prevStep, propertyDetails, setPropertyDetails, setOpened,
 
   const user = useSelector((state) => state.auth.userInfo);
   const { refetch: refetchProperties } = useProperties();
-
+  console.log("❤️❤️❤️❤️❤️❤️",userInfoId)
   const { mutate, isLoading } = useMutation({
     mutationFn: (timeSlots) => createResidency({ // Pass timeSlots as a parameter
       ...propertyDetails,
+      userInfoId,
       timeSlots,
     }),
     onError: ({ response }) => toast.error(response.data.message, { position: 'bottom-right' }),

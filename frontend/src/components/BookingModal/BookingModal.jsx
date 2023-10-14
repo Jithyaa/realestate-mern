@@ -3,24 +3,26 @@ import { Button, Modal, Select } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { useSelector } from 'react-redux';
 import { useMutation } from 'react-query';
-import { bookVisit } from '../../utils/api';
+import { bookVisit } from '../../utils/api.js';
 
 const BookingModal = ({ opened, setOpened, email, propertyId, availableTimes, propertyDetails }) => {
   const [dateValue, setDateValue] = useState(null);
   const [selectedTime, setSelectedTime] = useState('');
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo: { token } } = useSelector((state) => state.auth);
+  console.log(token);
   const { mutate, isLoading } = useMutation({
-    mutationFn: () => bookVisit(dateValue, propertyId, email, selectedTime, propertyDetails || []),
+    mutationFn: () => bookVisit(dateValue,selectedTime, propertyId, email, token,  timeSlots || []),
   });
 
 
 
   console.log('propertyDetails:', propertyDetails);
-  // console.log('propertyDetails.timeSlots:', propertyDetails?.timeSlots);
+
+
 
   const timeSlots = propertyDetails.data || [];
-  console.log('timeSlots:', timeSlots);
-
+  console.log('timeSlotszzzzzzzzz:', timeSlots);
+  console.log('timeSlots type:', typeof timeSlots);
   return (
     <Modal
       opened={opened}
@@ -33,6 +35,7 @@ const BookingModal = ({ opened, setOpened, email, propertyId, availableTimes, pr
         <DateInput
           value={dateValue}
           onChange={setDateValue}
+          minDate={new Date()}
           label="Date input"
           placeholder="Date input"
         />
@@ -52,6 +55,7 @@ const BookingModal = ({ opened, setOpened, email, propertyId, availableTimes, pr
         ) : (
           <p>No available times</p>
         )}
+
 
         <Button disabled={!dateValue} onClick={() => mutate()}>
           Book Visit

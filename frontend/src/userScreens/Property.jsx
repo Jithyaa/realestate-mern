@@ -25,7 +25,9 @@ const Property = () => {
   const { data, isLoading, isError } = useQuery(["resd", id], () =>
     getProperty(id)
   );
-  console.log("heyyyyyyyyyyyyyyyyyyyyyy", data)
+  console.log("heyyyyyyyyyyyyyyyyyyyyyy ", data)
+ 
+
 
   const { userInfo } = useSelector((state) => state.auth);
   const [modalOpened, setModalOpened] = useState(false)
@@ -55,7 +57,7 @@ const Property = () => {
 
     )
   }
-
+  console.log("Time Slotsssssssssss:", data?.timeSlots);
   return (
     
     <div className='wrapper'>
@@ -117,16 +119,13 @@ const Property = () => {
               </span>
             </div>
 
-
-
-
             {/* booking button */}
 
             <button className='button' onClick={() => setModalOpened(true)}>
               Book your visit
             </button>
 
-            <button>Chat With Owner</button>
+            {/* <button>Chat With Owner</button> */}
 
             <BookingModal
               opened={modalOpened}

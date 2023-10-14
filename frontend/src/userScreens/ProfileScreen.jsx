@@ -8,6 +8,8 @@ import {toast} from 'react-toastify'
 import Loader from '../components/Loader';
 import { setCredentials } from '../slices/authSlice';
 import { useUpdateUserMutation } from '../slices/usersApiSlices';
+import SideBar from '../components/SideBar/SideBar.jsx';
+import '../UserCss/Profile.css'
 
 
 const ProfileScreen = () => {
@@ -54,6 +56,8 @@ const ProfileScreen = () => {
        }
     }
   return (
+    <div className="profile-container">
+      <SideBar/>
     <FormContainer>
         <h1>Update Profile</h1>
         <Form onSubmit={submitHandler}>
@@ -116,6 +120,7 @@ const ProfileScreen = () => {
             </Button>
         </Form>
     </FormContainer>
+    </div>
   )
 }
 

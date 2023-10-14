@@ -1,17 +1,20 @@
 import axios from "axios";
 import dayjs from 'dayjs'
 import { toast } from "react-toastify";
-
+import {useSelector} from "react-redux"
 export const api = axios.create({
     baseURL:"http://localhost:5000/api",
 })
 
 export const getAllProperties = async()=>{
+    
     try {
         const response = await api.get("/residency/allresidencies",{
             timeout :10*1000,
         });
-        console.log("jjjh",response)
+        
+        console.log("response",response);
+
         if(response.status=== 400 || response.status=== 500 ){
             throw response.data;
         }
@@ -59,33 +62,39 @@ export const toFav=async(id,email,token)=>{
     }
 };
 
-export const createResidency=async(data,token)=>{
-    try {
-        const res=await api.post(
-            `/residency/create`,
-            {
-                data
-            },
-            {
-                headers:{
-                    Authorizatin:`Bearer ${token}`,
-                },
-            }
-        )
-    } catch (error) {
-        throw error;
-    }
-}
 
-export const bookVisit = async (date, propertyId, email, token,timeSlots) => {
+export const createResidency = async (data, token) => {
+    try{
+      const res = await api.post(
+        `/residency/create`,
+        {
+          data
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+    }catch(error)
+    {
+      throw error
+    }
+  }
+
+
+export const bookVisit = async (dateValue, selectedTime, propertyId, email, token, timeSlots) => {
     try {
+      const formattedDate = dayjs(dateValue, 'YYYY-MM-DD').format('DD/MM/YYYY');
+  
       await api.post(
         `/user/bookVisit/${propertyId}`,
         {
-          email,
-          id: propertyId,
-          date: dayjs(date).format("DD/MM/YYYY"),
-          timeSlots:timeSlots
+            email,
+            id: propertyId,
+            date: formattedDate,
+            timeSlots: timeSlots,
+            selectedTime: selectedTime,
         },
         {
           headers: {
@@ -94,7 +103,9 @@ export const bookVisit = async (date, propertyId, email, token,timeSlots) => {
         }
       );
     } catch (error) {
-      toast.error("Something went wrong, Please try again");
+      console.error('An error occurred:', error);
+      toast.error('Something went wrong. Please try again.');
       throw error;
     }
   };
+  

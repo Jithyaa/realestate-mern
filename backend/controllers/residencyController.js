@@ -3,14 +3,13 @@ import Residency from "../models/residencyModel.js";
 
 
 const createResidency = asyncHandler(async (req, res) => {
- 
   try {
     const { title, description, price, address, country, city,
-      facilities, image, userEmail, type, timeSlots } = req.body.data;
-
-      let savedResidency;
-
-    const newResidency = new Residency({
+      facilities, image, type, timeSlots,userInfoId } = req.body.data; 
+      console.log("rrrrrrrrrr👌👌",req.body.data)
+      console.log("🤷🤦‍♂️",req.user)
+    let savedResidency;
+    const newResidency = await Residency.create({
       title,
       description,
       price,
@@ -20,42 +19,86 @@ const createResidency = asyncHandler(async (req, res) => {
       type,
       image,
       facilities,
-      userEmail,
+      userEmail: req.body.data.userEmail, 
       timeSlots,
-      owner: userEmail._id,
+      owner: userInfoId,
     });
-    try {
-      
-       savedResidency = await newResidency.save();
-    } catch (error) {
-      console.error('Error creating residency:', error);
-      throw new Error('Error creating residency');
-    }
-    
-    
-    console.log("56tgghh777777", savedResidency);
-    res.send({ message: "Recidency created successfully", savedResidency })
+
+    // try {
+    //   // savedResidency = await newResidency.save();
+    //   console.log("😒",newResidency)
+    // } catch (error) {
+    //   if (error.code === 11000) { 
+    //     // Handle duplicate key error (duplicate address)
+    //     return res.status(400).json({ message: "A residency with this address already exists" });
+    //   } else {
+    //     console.error('Error creating residency:', error);
+    //     console.error(error);
+    //     throw new Error('Error creating residency');
+    //   }
+    // }
+
+    // console.log("New Residency:", savedResidency);
+    res.status(201).json({ message: "Residency created successfully", newResidency });
 
   } catch (err) {
-    if (err.code === "P2002") {
-      throw new Error("A residency with address already there")
-    }else{
-      res.status(500).json({ message: "Internal server error", error: err.message });
-    }
+    res.status(500).json({ message: err.message, error: err.message });
   }
 });
 
-const getAllResidencies = asyncHandler(async(req,res)=>{
+
+// const getAllResidencies = asyncHandler(async(req,res)=>{
+//   try {
+//     const residencies = await Residency.find().sort({createdAt:'desc'})
+//     .exec();
+//     res.json(residencies);
+
+//   } catch (err) {
+//     res.status(500).json({message: "Internal server error", error:err.message});
+//   }
+
+// });
+
+
+const getAllResidencies = asyncHandler(async (req, res) => {
+  
   try {
-    const residencies = await Residency.find().sort({createdAt:'desc'})
-    .exec();
-    res.json(residencies);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 8; 
+    const totalCount = await Residency.countDocuments();
 
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    const residencies = await Residency.find()
+      .sort({ createdAt: 'desc' })
+      .skip(startIndex)
+      .limit(limit)
+      .exec();
+
+    const results = {
+      totalResidencies: totalCount,
+      pageCount: Math.ceil(totalCount / limit),
+      currentPage: page,
+    };
+
+    if (endIndex < totalCount) {
+      results.nextPage = page + 1;
+    }
+
+    if (startIndex > 0) {
+      results.prevPage = page - 1;
+    }
+
+    results.residencies = residencies; 
+
+    res.json(results);
   } catch (err) {
-    res.status(500).json({message: "Internal server error", error:err.message});
+    res.status(500).json({ message: 'Internal server error', error: err.message });
   }
-
 });
+
+
 
       // to get specific residency
 
@@ -75,6 +118,8 @@ const getResidency = asyncHandler(async(req,res)=>{
   }
 
 })
+
+
 
 
 export { createResidency,getAllResidencies,getResidency}

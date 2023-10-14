@@ -267,27 +267,30 @@ const resetPassword = asyncHandler(async (req, res) => {
 
 // book visit to residency //
 
-const bookvisit = asyncHandler(async (req, res) => {
-  const { email, date, timeSlots } = req.body
-  console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhh",req.body)
+const bookVisit = async (req, res) => {
+  const { email, date, timeSlots } = req.body;
   const { id } = req.params;
 
   try {
-    const alreadyBooked = await User.findOne({ email }, 'bookedVisits').exec();
+    const user = await User.findOne({ email });
 
-    if (alreadyBooked.bookedVisits.some((visit) => visit.id === id)) {
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
+
+    if (user.bookedVisits.some((visit) => visit.id === id)) {
       res.status(400).json({ message: "This residency is already booked by you" });
     } else {
-      await User.updateOne(
-        { email: email },
-        { $push: { bookedVisits: { id, date,timeSlots } } }
-      ).exec();
+      user.bookedVisits.push({ id, date, timeSlots });
+      await user.save();
       res.send("Your visit is booked successfully");
     }
   } catch (err) {
-    throw new Error(err.message)
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" });
   }
-});
+};
 
 const getAllBookings = asyncHandler(async (req, res) => {
   const {email}=req.body
@@ -381,7 +384,7 @@ const getAllFavorites = asyncHandler(async(req,res)=>{
 export {
   authUser, registerUser, logoutUser, getUserProfile,
   updateUserProfile, sendPasswordResetEmail, verifyOtp,
-  resetPassword, verifyRegisterOtp, bookvisit, getAllBookings,
+  resetPassword, verifyRegisterOtp, bookVisit, getAllBookings,
   cancelBooking, toFav, getAllFavorites, 
 };
 
