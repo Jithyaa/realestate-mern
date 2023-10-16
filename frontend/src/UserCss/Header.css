@@ -12,10 +12,12 @@
     text-decoration: none; /* Remove underline on hover */
   }
   .custom-navbar {
-    height: 68px; /* Adjust the height as needed */
-    background-color: rgba(32, 40, 129, 0.2);
-    position: sticky;
+    height: 78px; /* Adjust the height as needed */
+    background-color: rgba(32, 40, 129, 0.329);
+    position: fixed !important;
     top: 0;
+    right: 0;
+    left: 0;
     z-index: 100;
   }
   .navbar-brand {

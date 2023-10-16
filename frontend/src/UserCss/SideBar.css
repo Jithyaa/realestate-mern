@@ -3,10 +3,10 @@
     height: 100%;
     width: 250px;
     position: fixed;
-    top: 0;
+    top: 78px;
     left: 0;
     background-color: #8d878f;
-    padding-top: 80px;
+    padding-top: 35px;
   }
   
   .sidebar-header {

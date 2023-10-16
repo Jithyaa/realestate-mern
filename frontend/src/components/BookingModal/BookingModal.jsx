@@ -4,14 +4,20 @@ import { DateInput } from '@mantine/dates';
 import { useSelector } from 'react-redux';
 import { useMutation } from 'react-query';
 import { bookVisit } from '../../utils/api.js';
+import { toast } from 'react-toastify';
 
 const BookingModal = ({ opened, setOpened, email, propertyId, availableTimes, propertyDetails }) => {
   const [dateValue, setDateValue] = useState(null);
   const [selectedTime, setSelectedTime] = useState('');
   const { userInfo: { token } } = useSelector((state) => state.auth);
-  console.log(token);
+  const handleBookingSuccess = ()=>{
+    toast.success("You have booked your visit")
+  }
   const { mutate, isLoading } = useMutation({
-    mutationFn: () => bookVisit(dateValue,selectedTime, propertyId, email, token,  timeSlots || []),
+    mutationFn: () => bookVisit(dateValue,selectedTime, propertyId, email, token,  timeSlots),
+    onSuccess:()=> handleBookingSuccess(),
+    onError : ({response}) => toast.error(response.data.message),
+    onSettled : () => setOpened(false)
   });
 
 
@@ -57,7 +63,7 @@ const BookingModal = ({ opened, setOpened, email, propertyId, availableTimes, pr
         )}
 
 
-        <Button disabled={!dateValue} onClick={() => mutate()}>
+        <Button disabled={!dateValue || isLoading} onClick={() => mutate()}>
           Book Visit
         </Button>
       </div>

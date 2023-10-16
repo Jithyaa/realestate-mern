@@ -85,7 +85,7 @@ export const createResidency = async (data, token) => {
 
 export const bookVisit = async (dateValue, selectedTime, propertyId, email, token, timeSlots) => {
     try {
-      const formattedDate = dayjs(dateValue, 'YYYY-MM-DD').format('DD/MM/YYYY');
+      const formattedDate = dayjs(dateValue).format('DD/MM/YYYY');
   
       await api.post(
         `/user/bookVisit/${propertyId}`,

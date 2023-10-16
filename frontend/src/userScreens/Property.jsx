@@ -132,7 +132,7 @@ const Property = () => {
               setOpened={setModalOpened}
               propertyId={id}
               email={userInfo?.email}
-              propertyDetails={data?.timeSlots} // Pass the time slots here
+              propertyDetails={data?.timeSlots} 
             />
 
           </div>
