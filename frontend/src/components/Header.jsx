@@ -39,13 +39,13 @@ const Header = () => {
     <header>
       <Navbar variant='light' expand='lg' collapseOnSelect className='custom-navbar'>
         <div className='container'>
-          <Navbar.Brand href='/'>HOMES.COM</Navbar.Brand>
+          <Navbar.Brand href='/' style={{color:'white'}}>HOMES.COM</Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
               {userInfo ? (
                 <>
-                  <Nav.Link href='/properties' className='header-link'>
+                  <Nav.Link href='/properties' className='header-link' style={{color:'white'}}>
                     Residencies
                   </Nav.Link>
                   {/* <Nav.Link href='/buy' className='header-link'>
@@ -54,7 +54,7 @@ const Header = () => {
                   <Nav.Link href='/rent' className='header-link'>
                     Rent
                   </Nav.Link> */}
-                  <Nav.Link href='' className='header-link' onClick={handleAddPropertyClick}>
+                  <Nav.Link href='' className='header-link' style={{color:'white'}} onClick={handleAddPropertyClick}>
                     Add your Property
                   </Nav.Link>
                   <AddPropertyModal
@@ -62,9 +62,9 @@ const Header = () => {
                     setOpened={setModalOpened}
                   />
 
-                  <NavDropdown title={userInfo.name || userInfo.data.name} id='username'>
-                    <NavDropdown.Item href='/profile'>Profile</NavDropdown.Item>
-                    <NavDropdown.Item onClick={logoutHandler}>
+                  <NavDropdown  title={userInfo.name || userInfo.data.name} id='username' >
+                    <NavDropdown.Item href='/profile' >Profile</NavDropdown.Item>
+                    <NavDropdown.Item onClick={logoutHandler} >
                       Logout
                     </NavDropdown.Item>
                   </NavDropdown>

@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { setCredentials } from '../slices/authSlice';
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
@@ -16,6 +16,15 @@ import Heart from '../components/Heart/Heart';
 import { userApiSlice } from '../slices/usersApiSlices';
 
 
+import { Navigation, Pagination, Scrollbar,  Autoplay } from 'swiper/modules';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 
 const Property = () => {
@@ -26,7 +35,7 @@ const Property = () => {
     getProperty(id)
   );
   console.log("heyyyyyyyyyyyyyyyyyyyyyy ", data)
- 
+
 
 
   const { userInfo } = useSelector((state) => state.auth);
@@ -36,6 +45,15 @@ const Property = () => {
   // useEffect(() => {
   //   // Fetch property details here if needed
   // }, [propertyId]);
+
+
+  // const sliderSettings = {
+  //   spaceBetween: 10,
+  //   navigation: true,
+  //   pagination: {
+  //     clickable: true,
+  //   },
+  // };
 
   if (isLoading) {
     return (
@@ -59,14 +77,41 @@ const Property = () => {
   }
   console.log("Time Slotsssssssssss:", data?.timeSlots);
   return (
-    
+
     <div className='wrapper'>
       <div className='flexColStart paddings innerWidth property-container'>
         <div className="like">
-          <Heart />
+          {/* <Heart /> */}
         </div>
 
-        <img src={data?.image} alt="home image" />
+        {/* <img src={data?.image} alt="home image" /> */}
+
+        <Swiper
+          modules={[Navigation, Pagination, Scrollbar, Autoplay]}
+          autoplay={{delay:2500,
+          disableOnInteraction:false
+          }}
+          // spaceBetween={10}
+          slidesPerView={3}
+          centeredSlides={true}
+          zoom={false}
+          navigation
+          pagination={{ clickable: true }}
+          // scrollbar={{ draggable: true }}
+          onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => console.log('slide change')}
+        >
+          {data?.images.map((image, index) => (
+            <SwiperSlide key={index}>
+              <img
+                src={image}
+                alt={`home image ${index + 1}`}
+                className="swiper-image" 
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
 
 
         <div className="flexCenter property-details">
@@ -132,7 +177,7 @@ const Property = () => {
               setOpened={setModalOpened}
               propertyId={id}
               email={userInfo?.email}
-              propertyDetails={data?.timeSlots} 
+              propertyDetails={data?.timeSlots}
             />
 
           </div>

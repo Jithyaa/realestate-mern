@@ -30,9 +30,9 @@ const residencySchema = mongoose.Schema({
         type:String,
         enum:["Buy","Rent"]
     },
-    image:{
-        type:String,
-        required:true
+    images:{
+        type: [String ],
+        required:true,
     },
     facilities:{
         type:mongoose.Schema.Types.Mixed,    /* To allow flexible JSON data.*/

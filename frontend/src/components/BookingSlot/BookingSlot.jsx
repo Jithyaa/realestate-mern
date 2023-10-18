@@ -41,7 +41,7 @@ const BookingSlot = ({ prevStep, propertyDetails, setPropertyDetails, setOpened,
         country: '',
         city: '',
         address: '',
-        image: null,
+        images: null,
         facilities: {
           bedrooms: 0,
           parkings: 0,

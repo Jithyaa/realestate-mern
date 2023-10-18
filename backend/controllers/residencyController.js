@@ -5,7 +5,7 @@ import Residency from "../models/residencyModel.js";
 const createResidency = asyncHandler(async (req, res) => {
   try {
     const { title, description, price, address, country, city,
-      facilities, image, type, timeSlots,userInfoId } = req.body.data; 
+      facilities, images, type, timeSlots,userInfoId } = req.body.data; 
       console.log("rrrrrrrrrr👌👌",req.body.data)
       console.log("🤷🤦‍♂️",req.user)
     let savedResidency;
@@ -17,7 +17,7 @@ const createResidency = asyncHandler(async (req, res) => {
       city,
       country,
       type,
-      image,
+      images,
       facilities,
       userEmail: req.body.data.userEmail, 
       timeSlots,

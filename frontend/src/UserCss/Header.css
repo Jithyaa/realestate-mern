@@ -21,9 +21,9 @@
     z-index: 100;
   }
   .navbar-brand {
-    text-decoration: none; /* Remove underline from the Navbar.Brand */
-    font-size: 25px; /* Set the font size */
-    font-weight: bold; /* Set the font weight */
+    text-decoration: none; 
+    font-size: 25px; 
+    font-weight: bold; 
   }
   
   /* Style the Navbar.Brand on hover */
