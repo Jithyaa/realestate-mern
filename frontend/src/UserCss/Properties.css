@@ -36,8 +36,8 @@
     display: inline-block;
     padding: 8px 16px;
     margin: 0 4px;
-    background-color: #007bff; /* Change the background color as needed */
-    color: #fff; /* Change the text color as needed */
+    background-color: #1e1f20; /* Change the background color as needed */
+    color: #f5f1f1; /* Change the text color as needed */
     border-radius: 4px;
     text-decoration: none;
     cursor: pointer;
@@ -47,12 +47,12 @@
   /* Hover effect for pagination controls */
   .pagination-previous:hover,
   .pagination-next:hover {
-    background-color: #0056b3; /* Change the hover background color as needed */
+    background-color: #576064; /* Change the hover background color as needed */
   }
   
   /* Active page number */
   .pagination-page.selected {
-    background-color: #0056b3; /* Change the background color of the active page */
+    background-color: #5f666e; /* Change the background color of the active page */
     color: #fff; /* Change the text color of the active page */
   }
   

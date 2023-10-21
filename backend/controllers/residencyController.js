@@ -4,15 +4,18 @@ import Residency from "../models/residencyModel.js";
 
 const createResidency = asyncHandler(async (req, res) => {
   try {
-    const { title, description, price, address, country, city,
+    const { title, description, price,address, country, city,
       facilities, images, type, timeSlots,userInfoId } = req.body.data; 
       console.log("rrrrrrrrrr👌👌",req.body.data)
-      console.log("🤷🤦‍♂️",req.user)
+      let rate = price.split(" ")
+       
+      const numericPrice = !isNaN(parseFloat(rate[0])) ? (rate[1]=== 'Cr' ? parseFloat(rate[0]) * 10000000 : parseFloat(rate[0]) * 100000) : 0 ;
+
     let savedResidency;
     const newResidency = await Residency.create({
       title,
       description,
-      price,
+      price:numericPrice,
       address,
       city,
       country,

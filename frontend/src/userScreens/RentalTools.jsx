@@ -22,8 +22,6 @@ const RentalTools = () => {
 
         <div style={{}} className='center-container'>
           <h2>List. Manage. Earn. It's really that simple.</h2>
-              
-
               </div>
              
      </section>

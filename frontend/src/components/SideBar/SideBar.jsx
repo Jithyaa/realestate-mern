@@ -28,7 +28,7 @@ const SideBar = () => {
           <div className={`dropdown ${showHomeDropdown ? 'show' : ''}`}>
             <ul className="dropdown-content">
               <li>
-                <Link to="/dashboard">My Residencies</Link>
+                <Link to="/my-residencies">My Residencies</Link>
               </li>
               {/* <li>
                 <Link to="/dashboard">Option 2</Link>

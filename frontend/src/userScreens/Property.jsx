@@ -16,7 +16,7 @@ import Heart from '../components/Heart/Heart';
 import { userApiSlice } from '../slices/usersApiSlices';
 
 
-import { Navigation, Pagination, Scrollbar,  Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, Scrollbar, Autoplay } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -88,8 +88,9 @@ const Property = () => {
 
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, Autoplay]}
-          autoplay={{delay:2500,
-          disableOnInteraction:false
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false
           }}
           // spaceBetween={10}
           slidesPerView={3}
@@ -106,7 +107,7 @@ const Property = () => {
               <img
                 src={image}
                 alt={`home image ${index + 1}`}
-                className="swiper-image" 
+                className="swiper-image"
               />
             </SwiperSlide>
           ))}
@@ -126,8 +127,18 @@ const Property = () => {
 
             <div className='flexStart head'>
               <span className='primaryText'>{data?.title} </span>
-              <span className='orangeText' style={{ fontSize: '1.5rem', marginLeft: '1.5rem' }}><b>Rs </b>{data?.price}</span>
-              <span className='secondaryText' style={{ fontSize: '1rem', marginLeft: '2.5rem', color: '#0a3ce4', fontWeight: '500' }}>{data?.type}</span>
+              <span className='orangeText' style={{ fontSize: '1.5rem', marginLeft: '1.5rem' }}><b>₹ </b>{data?.price}</span>
+              <button className='secondaryText'
+                style={{
+                  fontSize: '1rem',
+                  marginLeft: '2.5rem',
+                  fontWeight: '500',
+                  backgroundColor: 'green',
+                  color: 'white',
+                  borderRadius: '4px',
+                  padding: '5px 10px',
+                  cursor: 'pointer'
+                }}>{data?.type}</button>
 
             </div>
             {/* facilities */}

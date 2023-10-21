@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Search from '../components/Search';
 import '../UserCss/Properties.css';
 import useProperties from './useProperties';
@@ -6,11 +6,16 @@ import Loader from '../components/Loader';
 import PropertyCard from '../components/propertyCard/PropertyCard';
 import ReactPaginate from 'react-paginate';
 
-const Properties = () => {
+const Properties = ({modified}) => {
   const [currentPage, setCurrentPage] = useState(0); 
+  
+  const { data, isError, isLoading} = useProperties();  
+  useEffect(()=>{
+    
+  },[modified])
   const itemsPerPage = 8; 
 
-  const { data, isError, isLoading} = useProperties(); 
+  
   console.log("jjjjjjjjjjjjjjjjjjjjjjjjj 😊",data)
   const [filter, setFilter] = useState(""); 
 

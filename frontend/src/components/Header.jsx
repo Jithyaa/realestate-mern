@@ -7,7 +7,7 @@ import { logout } from '../slices/authSlice';
 import '../UserCss/Header.css'
 import AddPropertyModal from './AddPropertyModal/AddPropertyModal';
 
-const Header = () => {
+const Header = ({setModified}) => {
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -60,6 +60,7 @@ const Header = () => {
                   <AddPropertyModal
                     opened={modalOpened}
                     setOpened={setModalOpened}
+                    setModified={setModified}
                   />
 
                   <NavDropdown  title={userInfo.name || userInfo.data.name} id='username' >

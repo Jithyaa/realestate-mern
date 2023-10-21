@@ -13,6 +13,8 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const [emailError, setEmailError] = useState('');
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -41,6 +43,23 @@ const RegisterScreen = () => {
     }
   };
 
+  const handleEmailChange =(e)=>{
+    const enteredEmail = e.target.value;
+    setEmail(enteredEmail);
+
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+   
+    if(!enteredEmail){
+      setEmailError('Email is required');
+    }else if(!emailRegex.test(enteredEmail)){
+      setEmailError('Invalid email format');
+    }else{
+      setEmailError('');
+    }
+  };
+
+
+
   return (
     <div className="register-container">
       <div className="form-container">
@@ -57,9 +76,11 @@ const RegisterScreen = () => {
             type="email"
             placeholder="Email Address"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            // onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             required
           />
+          {emailError && <p>{emailError}</p> }
           <input
             type="text"
             placeholder="Number"
@@ -82,7 +103,7 @@ const RegisterScreen = () => {
             required
           />
           {isLoading && <Loader />}
-          <button type="submit">SIGN UP</button>
+          <button type="submit" disabled={!!emailError}>SIGN UP</button>
         </form>
         <p style={{ color: 'black' }} className="py-3"><b>Already have an account?</b>
           <Link to="/login">SIGN IN</Link>

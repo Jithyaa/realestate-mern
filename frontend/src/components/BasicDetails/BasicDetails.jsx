@@ -1,30 +1,39 @@
 import { useForm } from '@mantine/form'
-import React from 'react'
+import React, { useState } from 'react'
 import { validateString } from '../../utils/common'
 import { Box, Button, Group, NumberInput, TextInput, Textarea,Select } from '@mantine/core';
 
 const BasicDetails = ({ prevStep, nextStep, propertyDetails, setPropertyDetails }) => {
+
+    const [priceValue,setPriceValue] = useState('');
+    const [priceUnit,setPriceUnit] = useState( 'Cr');
+
     const form = useForm({
         initialValues: {
             title: propertyDetails.title,
             description: propertyDetails.description,
             type: propertyDetails.type || 'Buy',
-            price: propertyDetails.price,
+            priceValue: priceValue,
+            priceUnit:priceUnit,
 
 
         },
         validate: {
             title: (value) => validateString(value),
             description: (value) => validateString(value),
-            price: (value) => value < 1000 ? "Must be greater than Rupees 50000 " : null,
+            priceValue: (value) => isNaN(value) ? "Price must be a number " : null,
         },
     });
+
+    console.log("🥶🥶🥶🥶🥶🥶🥶🥶🥶",priceValue);
+    console.log("☠️☠️☠️☠️☠️☠️☠️☠️☠️",priceUnit);
 
     const { title, description, type, price } = form.values
 
     const handleSubmit = () => {
         const { hasErrors } = form.validate()
         if (!hasErrors) {
+            const price = `${priceValue} ${priceUnit}`
             setPropertyDetails((prev) => ({ ...prev, title, description, type, price }))
             nextStep();
         }
@@ -57,10 +66,28 @@ const BasicDetails = ({ prevStep, nextStep, propertyDetails, setPropertyDetails 
                 />
                 <NumberInput
                     withAsterisk
-                    label='Price'
-                    placeholder='1000'
+                    label='Price Value'
+                    placeholder='0'
                     min={0}
-                    {...form.getInputProps("price")}
+                    {...form.getInputProps("priceValue")}
+                    value={form.values.priceValue} // Use form values to control the input value
+                    onChange={(newValue) => {
+
+                        form.setFieldValue("priceValue", newValue);
+
+                         setPriceValue(newValue)
+                        form.setFieldValue("price", price);
+                    }}
+                    />
+
+                <Select
+                label='Price Unit'
+                data={['Cr','Lakh']}
+                value={propertyDetails.priceUnit || 'Cr'}
+                onChange={(value) => {
+                    setPriceUnit(value)
+                }}
+                
                 />
                 <Group position='center' mt="xl">
                     <Button variant='default' onClick={prevStep}>Back</Button>

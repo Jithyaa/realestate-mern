@@ -7,7 +7,7 @@ import BasicDetails from '../BasicDetails/BasicDetails.jsx';
 import BookingSlot from '../BookingSlot/BookingSlot.jsx';
 import Facilities from '../Facilities/Facilities.jsx';
 
-const AddPropertyModal = ({opened,setOpened}) => {
+const AddPropertyModal = ({opened,setOpened,setModified}) => {
     const [active,setActive] = useState(0);
     const {userInfo} = useSelector((state) => state.auth);
     console.log("hjjkjkjjkjk",userInfo);
@@ -90,10 +90,11 @@ const AddPropertyModal = ({opened,setOpened}) => {
           setPropertyDetails={setPropertyDetails}
           setOpened={setOpened}
           setActiveStep={setActive}
+          setModified={setModified}
           />
         </Stepper.Step>
 
-        <Stepper.Completed>
+        <Stepper.Completed >
           Completed, click back button to get to previous step
         </Stepper.Completed>
       </Stepper>

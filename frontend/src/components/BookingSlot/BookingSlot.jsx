@@ -6,7 +6,7 @@ import { useMutation } from 'react-query';
 import { toast } from 'react-toastify';
 import { createResidency } from '../../utils/api';
 
-const BookingSlot = ({ prevStep, propertyDetails, setPropertyDetails, setOpened, setActiveStep }) => {
+const BookingSlot = ({ prevStep, propertyDetails, setPropertyDetails, setOpened, setActiveStep,setModified }) => {
   const [selectedTimeSlots, setSelectedTimeSlots] = useState([]);
   const userInfoId = useSelector((state)=>state.auth.userInfo._id);
  
@@ -20,6 +20,7 @@ const BookingSlot = ({ prevStep, propertyDetails, setPropertyDetails, setOpened,
       timeSlots: selectedTimeSlots,
     }));
     mutate(selectedTimeSlots); // Pass selectedTimeSlots to mutate
+    setModified(!modified)
   };
 
   const user = useSelector((state) => state.auth.userInfo);
