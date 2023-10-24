@@ -52,7 +52,7 @@ const AdHomeScreen = () => {
     <AdminSideBar/>
     <Container style={{marginRight:'5rem'}} >
     
-      <Card style={{ marginTop: '4rem', }}>
+      <Card style={{ marginTop: '4rem', backgroundColor:'#f9f9f994'}}>
       
         <Card.Body>
           <h2><b>User List</b></h2>
