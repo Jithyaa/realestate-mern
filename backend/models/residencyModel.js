@@ -52,6 +52,10 @@ const residencySchema = mongoose.Schema({
       
       timeSlots:{
         type:[String]
+      },
+      unList:{
+        type:Boolean,
+        default:false,
       }
 },
 {

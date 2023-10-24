@@ -1,0 +1,20 @@
+.image{
+    width:12rem;
+    text-align: center;
+}
+.title,
+.price,
+.address,
+.city,
+.country{
+    width:8rem;
+    text-align: center;
+}
+.modal-heading{
+    font-weight: 700;
+    border:none;
+}
+.modal-card .image{
+    overflow-y: scroll;
+    height:8rem;
+}

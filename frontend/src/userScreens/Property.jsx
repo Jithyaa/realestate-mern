@@ -15,45 +15,49 @@ import BookingModal from '../components/BookingModal/BookingModal.jsx';
 import Heart from '../components/Heart/Heart';
 import { userApiSlice } from '../slices/usersApiSlices';
 
-
 import { Navigation, Pagination, Scrollbar, Autoplay } from 'swiper/modules';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { get } from 'lodash';
 
 
 const Property = () => {
-  // const { propertyId } = useParams();
   const { pathname } = useLocation()
   const id = pathname.split("/").slice(-1)[0]
   const { data, isLoading, isError } = useQuery(["resd", id], () =>
     getProperty(id)
   );
   console.log("heyyyyyyyyyyyyyyyyyyyyyy ", data)
-
-
+  console.log("iiiiiiiiiiiiiiiiiiiiii",id)
 
   const { userInfo } = useSelector((state) => state.auth);
   const [modalOpened, setModalOpened] = useState(false)
-  // const {useLoginMutation} = userApiSlice()
 
-  // useEffect(() => {
-  //   // Fetch property details here if needed
-  // }, [propertyId]);
+  useEffect(()=>{
+    getProperty(id).then((data)=>{
+      console.log(data);
+    })
+    .catch((error)=>{
+      console.error(error);
+    });
+
+  },[id]);
+
+  function formatLargeNumber(number) {
+    if (number >= 10000000) {
+      return (number / 10000000).toFixed(1) + ' Cr';
+    } else if (number >= 100000) {
+      return (number / 100000).toFixed(1) + ' Lakh';
+    } else {
+      return number.toString();
+    }
+  }
 
 
-  // const sliderSettings = {
-  //   spaceBetween: 10,
-  //   navigation: true,
-  //   pagination: {
-  //     clickable: true,
-  //   },
-  // };
+
 
   if (isLoading) {
     return (
@@ -127,7 +131,7 @@ const Property = () => {
 
             <div className='flexStart head'>
               <span className='primaryText'>{data?.title} </span>
-              <span className='orangeText' style={{ fontSize: '1.5rem', marginLeft: '1.5rem' }}><b>₹ </b>{data?.price}</span>
+              <span className='orangeText' style={{ fontSize: '1.5rem', marginLeft: '1.5rem' }}><b>₹ </b>{formatLargeNumber(data?.price)}</span>
               <button className='secondaryText'
                 style={{
                   fontSize: '1rem',

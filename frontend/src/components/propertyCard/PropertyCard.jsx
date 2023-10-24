@@ -3,33 +3,40 @@ import './PropertyCard.css';
 import { truncate } from 'lodash';
 import { useNavigate } from 'react-router-dom';
 import { AiFillHeart } from 'react-icons/ai';
+import Heart from '../Heart/Heart';
 
 const PropertyCard = ({ card }) => {
   const navigate = useNavigate();
+  console.log("qqqqqqqqqqqqqqqq",card)
 
   // Get the first image URL from the images array
   const firstImage = card.images && card.images.length > 0 ? card.images[3] : '';
+  
   function formatLargeNumber(number) {
     if (number >= 10000000) {
       return (number / 10000000).toFixed(1) + ' Cr';
     } else if (number >= 100000) {
-      return (number / 100000).toFixed(0) + ' Lakh';
+      return (number / 100000).toFixed(1) + ' Lakh';
     } else {
       return number.toString();
     }
   }
   return (
-    <div className='flexColStart r-card'>
-      <img src={firstImage} alt="home" /> {/* Display the first image */}
-      <AiFillHeart size={24} color='white' />
+    <div className='flexColStart r-card'
+    onClick={()=>navigate(`../properties/${card.id}`)}
+    >
+      <img src={firstImage} alt="home" /> 
+      {/* <AiFillHeart size={24} color='white' /> */}
+      <Heart id={card?.id}/>
       <div className="price-type">
         <span
           className="secondaryText r-price"
-          onClick={() => navigate(`../properties/${card.id}`)}
         >
+          
           <span style={{ color: "orange" }}>₹  </span>
           <span>{formatLargeNumber(card.price)}</span>
         </span>
+       
         <button
           className="secondaryText r-type"
           style={{

@@ -73,7 +73,8 @@ const getAllResidencies = asyncHandler(async (req, res) => {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
-    const residencies = await Residency.find()
+    const residencies = await Residency.find({unList:false})
+  
       .sort({ createdAt: 'desc' })
       .skip(startIndex)
       .limit(limit)
@@ -109,12 +110,12 @@ const getResidency = asyncHandler(async(req,res)=>{
   const {id} = req.params;
   console.log("fffffffffffffffff",id)
   try {
-    const residency =await Residency.findById(id).exec();
+    const residency =await Residency.findById(id);
     if(!residency){
       return res.status(404).json({message:"Residency not found"});
     }
 
-    res.send({...residency.toObject(),timeSlots:residency.timeSlots});
+    res.send(residency);
   } catch (err) {
     res.status(500).json({message:"Internal server error",error: err.message});
     

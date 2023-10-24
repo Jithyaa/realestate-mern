@@ -1,0 +1,70 @@
+Container for the property list
+.properties-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+  }
+  
+  /* Style for each property card */
+  .property-card {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    column-gap: 4rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for property title */
+  .property-title {
+    font-size: 24px;
+    margin: 0 0 10px;
+  }
+  
+  /* Style for property info */
+  .property-info {
+    font-size: 16px;
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  /* Style for the image gallery */
+  .image-gallery {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  /* Style for individual slider images */
+  .swiper-slide {
+    padding: 5px;
+  }
+  
+  /* Style for the slider navigation dots */
+  .swiper-pagination {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Style for active navigation dot */
+  .swiper-pagination-bullet-active {
+    background-color: #007bff;
+    width: 10px;
+    height: 10px;
+  }
+  
+  /* Style for property price */
+  .property-price {
+    font-size: 18px;
+    color: #28a745;
+  }
+  
+  /* Style for property address, city, and country */
+  .property-address {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
