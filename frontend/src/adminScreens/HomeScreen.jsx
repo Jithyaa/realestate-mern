@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../AdminCss/homeScreen.css';
 import {toast} from "react-toastify";
+import AdminSideBar from '../components/AdminSideBar/AdminSideBar.jsx';
 
 const AdHomeScreen = () => {
   const [users, setUsers] = useState([]);
@@ -47,10 +48,14 @@ const AdHomeScreen = () => {
   );
   console.log("🥶🥶🥶🥶🥶🥶🥶🥶",openModal);
   return (
-    <Container >
-      <Card style={{ marginTop: '4rem' }}>
+   <div>
+    <AdminSideBar/>
+    <Container style={{marginRight:'5rem'}} >
+    
+      <Card style={{ marginTop: '4rem', }}>
+      
         <Card.Body>
-          <h2>User List</h2>
+          <h2><b>User List</b></h2>
           <div style={{ display: 'flex', justifyContent: 'end', marginBottom: '0rem' }}>
             <input
               type="text"
@@ -203,6 +208,7 @@ const AdHomeScreen = () => {
         </div>
       }
     </Container>
+    </div>
   );
 };
 

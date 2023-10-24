@@ -21,7 +21,7 @@ const SideBar = () => {
       </div> */}
       <ul className="sidebar-menu">
         <li>
-          <Link to="/dashboard">
+          <Link to="">
             <i className="fas fa-home"></i>
             My Home
           </Link>

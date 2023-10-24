@@ -1,0 +1,31 @@
+/* Sidebar.css */
+.admin-sidebar {
+    height: 100%;
+    width: 150px;
+    position: fixed;
+    top: 78px;
+    left: 0;
+    background-color: #92918c50;
+    padding-top: 50px;
+  }
+  .adminsidebar-menu a {
+    text-decoration: none;
+    color: #080808; 
+    display: flex;
+    align-items: center;
+    padding: 10px 15px; 
+    transition: background-color 0.3s;
+    font-weight: bold;
+   gap: 0.5rem;
+}
+.adminsidebar-menu a:hover {
+    background-color: #55555538; 
+    color: #fff;
+}
+.adminsidebar-menu {
+    list-style: none; 
+    padding: 0; 
+}
+
+  
+  

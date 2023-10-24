@@ -25,10 +25,10 @@ const AdminHeader = () => {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect style={{height:'4.9rem'}}>
         <div className="container">
-          <LinkContainer to="/admin">
-            <Navbar.Brand href="/admin">Admin</Navbar.Brand>
+          <LinkContainer to="/admin/admin">
+            <Navbar.Brand href="/admin/admin">Homes.com</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
