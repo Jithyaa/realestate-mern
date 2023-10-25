@@ -1,0 +1,45 @@
+.mantine-Paper-root{
+   
+ height: 80vh;
+}
+.mantine-Modal-body{
+  
+    /* height: 85.59%; */
+    display: grid;
+    place-items: center;
+
+}
+
+/* Style the select element */
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  /* Style the dropdown arrow (the default select arrow) */
+  select::-ms-expand {
+    display: none; /* Hide in Internet Explorer */
+  }
+  
+  /* Style the options within the dropdown */
+  select option {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #fff;
+  }
+  
+  /* Change the background color on hover */
+  select option:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Apply custom styles for the select when it's focused */
+  select:focus {
+    border: 1px solid #007BFF; /* Change to your desired focus color */
+    box-shadow: 0 0 5px #007BFF; /* Add a subtle shadow on focus */
+  }
+  

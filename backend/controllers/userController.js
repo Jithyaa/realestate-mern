@@ -268,7 +268,8 @@ const resetPassword = asyncHandler(async (req, res) => {
 // book visit to residency //
 
 const bookVisit = async (req, res) => {
-  const { email, date, timeSlots } = req.body;
+  console.log("⭐⭐⭐⭐⭐😑",req.body);
+  const { email, date, selectedTime } = req.body;
   const { id } = req.params;
 
   try {
@@ -282,7 +283,7 @@ const bookVisit = async (req, res) => {
     if (user.bookedVisits.some((visit) => visit.id === id)) {
       res.status(400).json({ message: "This residency is already booked by you" });
     } else {
-      user.bookedVisits.push({ id, date, timeSlots });
+      user.bookedVisits.push({ id, date, selectedTime });
       await user.save();
       res.send("Your visit is booked successfully");
     }

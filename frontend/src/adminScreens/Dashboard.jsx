@@ -17,7 +17,7 @@ const Dashboard = () => {
         height: 300,
         sx: {
             [`.${axisClasses.left} .${axisClasses.label}`]: {
-                transform: 'translate(-20px, 0)',
+                transform: 'translate(-1px, 0)',
             },
         },
     };
@@ -42,7 +42,7 @@ const Dashboard = () => {
         <main className='main-container'>
             <AdminSideBar />
             <div className='main-title'>
-                <h3><b>DASHBOARD</b></h3>
+                <h3><b><u>DASHBOARD</u></b></h3>
             </div>
             <div className='main-cards'>
                 <div className='card'>

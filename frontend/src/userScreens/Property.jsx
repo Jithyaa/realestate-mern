@@ -19,6 +19,7 @@ import 'swiper/css/scrollbar';
 
 
 const Property = () => {
+ 
   const { pathname } = useLocation()
   const id = pathname.split("/").slice(-1)[0]
   const { data, isLoading, isError } = useQuery(["resd", id], () =>
@@ -69,7 +70,6 @@ const Property = () => {
 
     )
   }
-  console.log("Time Slotsssssssssss:", data?.timeSlots);
   return (
 
     <div className='wrapper'>
@@ -181,7 +181,8 @@ const Property = () => {
               setOpened={setModalOpened}
               propertyId={id}
               email={userInfo?.email}
-              propertyDetails={data?.timeSlots}
+              // propertyDetails={data?.timeSlots}
+              timeSlots={data?.timeSlots}
             />
 
           </div>

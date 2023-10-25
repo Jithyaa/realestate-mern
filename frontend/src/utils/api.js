@@ -46,7 +46,7 @@ export const getProperty = async(id)=>{
 
 export const toFav=async(id,email,token)=>{
     try {
-        await api.post(`/user/toFav/${id}`,
+        await api.post(`/users/toFav/${id}`,
         {
             email,
         },
@@ -87,7 +87,7 @@ export const bookVisit = async (dateValue, selectedTime, propertyId, email, toke
       const formattedDate = dayjs(dateValue).format('DD/MM/YYYY');
   
       await api.post(
-        `/user/bookVisit/${propertyId}`,
+        `/users/bookVisit/${propertyId}`,
         {
             email,
             id: propertyId,
