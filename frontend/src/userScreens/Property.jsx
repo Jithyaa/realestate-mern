@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { setCredentials } from '../slices/authSlice';
 import { useSelector } from 'react-redux';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { getProperty } from '../utils/api';
 import Loader from '../components/Loader';
@@ -12,16 +10,12 @@ import { MdLocationPin, MdMeetingRoom } from 'react-icons/md';
 import { FaShower } from 'react-icons/fa';
 import Map from '../components/Map/Map.jsx';
 import BookingModal from '../components/BookingModal/BookingModal.jsx';
-import Heart from '../components/Heart/Heart';
-import { userApiSlice } from '../slices/usersApiSlices';
-
 import { Navigation, Pagination, Scrollbar, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { get } from 'lodash';
 
 
 const Property = () => {
@@ -31,20 +25,19 @@ const Property = () => {
     getProperty(id)
   );
   console.log("heyyyyyyyyyyyyyyyyyyyyyy ", data)
-  console.log("iiiiiiiiiiiiiiiiiiiiii",id)
 
   const { userInfo } = useSelector((state) => state.auth);
   const [modalOpened, setModalOpened] = useState(false)
 
-  useEffect(()=>{
-    getProperty(id).then((data)=>{
+  useEffect(() => {
+    getProperty(id).then((data) => {
       console.log(data);
     })
-    .catch((error)=>{
-      console.error(error);
-    });
+      .catch((error) => {
+        console.error(error);
+      });
 
-  },[id]);
+  }, [id]);
 
   function formatLargeNumber(number) {
     if (number >= 10000000) {
@@ -55,9 +48,6 @@ const Property = () => {
       return number.toString();
     }
   }
-
-
-
 
   if (isLoading) {
     return (
@@ -96,15 +86,14 @@ const Property = () => {
             delay: 2500,
             disableOnInteraction: false
           }}
-          // spaceBetween={10}
+          spaceBetween={10}
           slidesPerView={3}
           centeredSlides={true}
           zoom={false}
           navigation
           pagination={{ clickable: true }}
-          // scrollbar={{ draggable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log('slide change')}
+          loop={true}
+          initialSlide={0}
         >
           {data?.images.map((image, index) => (
             <SwiperSlide key={index}>

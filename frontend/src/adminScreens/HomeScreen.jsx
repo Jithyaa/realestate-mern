@@ -42,6 +42,17 @@ const AdHomeScreen = () => {
   };
 
 
+  function formatLargeNumber(number) {
+    if (number >= 10000000) {
+      return (number / 10000000).toFixed(1) + ' Cr';
+    } else if (number >= 100000) {
+      return (number / 100000).toFixed(1) + ' Lakh';
+    } else {
+      return number.toString();
+    }
+  }
+
+
   const filteredUsers = users.filter((user) =>
     user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     user.email.toLowerCase().includes(searchQuery.toLowerCase())
@@ -173,7 +184,7 @@ const AdHomeScreen = () => {
             ))}
           </div>
           <div className="title">{ele.title}</div>
-          <div className="price">Rs {ele.price}</div>
+          <div className="price">₹  {formatLargeNumber(ele.price)}</div>
           <div className="address">{ele.address}</div>
           <div className="city">{ele.city}</div>
           <div className="country">{ele.country}</div>

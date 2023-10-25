@@ -64,7 +64,7 @@ const Dashboard = () => {
                         <h4>Total Residencies</h4>
                         <i class="fa-solid fa-house"></i>
                     </div>
-                    <h1>10</h1>
+                    <h1>4</h1>
                 </div>
             </div>
             <div className='charts'>

@@ -8,8 +8,9 @@ import Heart from '../Heart/Heart';
 const PropertyCard = ({ card }) => {
   const navigate = useNavigate();
   console.log("qqqqqqqqqqqqqqqq",card)
+  console.log("iiidddddddddddddd",card._id);
 
-  // Get the first image URL from the images array
+
   const firstImage = card.images && card.images.length > 0 ? card.images[3] : '';
   
   function formatLargeNumber(number) {
@@ -23,8 +24,9 @@ const PropertyCard = ({ card }) => {
   }
   return (
     <div className='flexColStart r-card'
-    onClick={()=>navigate(`../properties/${card.id}`)}
+    onClick={()=>navigate(`../properties/${card._id}`)}
     >
+    
       <img src={firstImage} alt="home" /> 
       {/* <AiFillHeart size={24} color='white' /> */}
       <Heart id={card?.id}/>

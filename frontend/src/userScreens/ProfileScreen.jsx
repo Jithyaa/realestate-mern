@@ -62,7 +62,7 @@ const ProfileScreen = () => {
     }
   }
   return (
-    <div className="profile-container" style={{marginTop:"6rem"}}>
+    <div className="profile-container" style={{ marginTop: "6rem",  }}>
       <SideBar />
       <FormContainer>
         <h1>Update Profile</h1>
@@ -118,13 +118,6 @@ const ProfileScreen = () => {
               </Col>
             </Row>
           </Container>
-
-
-
-
-
-
-
           <Form.Group className='my-2' controlId='confirmPassword'>
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
@@ -134,10 +127,7 @@ const ProfileScreen = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             ></Form.Control>
           </Form.Group>
-
           {isLoading && <Loader />}
-
-
           <Button type='submit' variant='primary' className='mt-3' >
             UPDATE
           </Button>
