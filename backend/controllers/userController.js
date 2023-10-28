@@ -2,6 +2,8 @@ import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js';
 import User from '../models/userModel.js'
 import nodemailer from 'nodemailer';
+import Booking from '../models/bookingModel.js';
+import Residency from '../models/residencyModel.js'
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -267,31 +269,70 @@ const resetPassword = asyncHandler(async (req, res) => {
 
 // book visit to residency //
 
+// const bookVisit = async (req, res) => {
+//   console.log("⭐⭐⭐⭐⭐😑",req.body);
+//   const { email, date, selectedTime } = req.body;
+//   const { id } = req.params;   // residency id //
+
+//   try {
+//     const user = await User.findOne({ email });
+
+//     if (!user) {
+//       res.status(404).json({ message: "User not found" });
+//       return;
+//     }
+
+//     if (user.bookedVisits.some((visit) => visit.id === id)) {
+//       res.status(400).json({ message: "This residency is already booked by you" });
+//     } else {
+//       user.bookedVisits.push({ id, date, selectedTime });
+//       await user.save();
+//       res.send("Your visit is booked successfully");
+//     }
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// };
+
+
+
 const bookVisit = async (req, res) => {
-  console.log("⭐⭐⭐⭐⭐😑",req.body);
-  const { email, date, selectedTime } = req.body;
-  const { id } = req.params;
+  console.log("⭐⭐⭐⭐⭐😑", req.body);
+ 
+  const { userEmail, date, selectedTime , owner} = req.body;
+  const { id  } = req.params; // residency id //
 
+  console.log("😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️", req.body.userEmail)
+  console.log("vvvvyyyy",owner);
   try {
-    const user = await User.findOne({ email });
+    const user = await Residency.findOne({ owner });
 
-    if (!user) {
-      res.status(404).json({ message: "User not found" });
-      return;
-    }
+    // if (!user) {
+    //   res.status(404).json({ message: "User not found" });
+    //   return;
+    // }
 
-    if (user.bookedVisits.some((visit) => visit.id === id)) {
-      res.status(400).json({ message: "This residency is already booked by you" });
-    } else {
-      user.bookedVisits.push({ id, date, selectedTime });
-      await user.save();
-      res.send("Your visit is booked successfully");
-    }
+    const newBooking = new Booking({
+      userEmail,
+      residencyId: id,  
+      date,
+      time: selectedTime,
+      ownerId:owner,
+    });
+
+    await newBooking.save();
+
+    res.send("Your visit is booked successfully");
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+
+
+
 
 const getAllBookings = asyncHandler(async (req, res) => {
   const {email}=req.body

@@ -16,10 +16,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-
-
 const Property = () => {
- 
+
   const { pathname } = useLocation()
   const id = pathname.split("/").slice(-1)[0]
   const { data, isLoading, isError } = useQuery(["resd", id], () =>
@@ -107,6 +105,9 @@ const Property = () => {
         </Swiper>
 
 
+       
+
+
 
         <div className="flexCenter property-details">
 
@@ -181,7 +182,7 @@ const Property = () => {
               setOpened={setModalOpened}
               propertyId={id}
               email={userInfo?.email}
-              // propertyDetails={data?.timeSlots}
+              owner={data?.owner}
               timeSlots={data?.timeSlots}
             />
 

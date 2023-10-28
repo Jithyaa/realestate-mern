@@ -41,9 +41,8 @@ const residencySchema = mongoose.Schema({
     
     userEmail:{
         type:String,
-        required:true,
-       
 
+        
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,

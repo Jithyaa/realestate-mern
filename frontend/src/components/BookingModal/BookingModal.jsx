@@ -7,33 +7,26 @@ import { bookVisit } from '../../utils/api.js';
 import { toast } from 'react-toastify';
 import '../BookingModal/BookingModal.css'
 
-const BookingModal = ({ opened, setOpened, email, propertyId, availableTimes, timeSlots }) => {
+const BookingModal = ({ opened, setOpened, email, propertyId, availableTimes, timeSlots,owner }) => {
   const [dateValue, setDateValue] = useState(null);
   const [selectedTime, setSelectedTime] = useState('');
   const { userInfo: { token } } = useSelector((state) => state.auth);
-  const handleBookingSuccess = ()=>{
+  const handleBookingSuccess = () => {
     toast.success("You have booked your visit")
   }
   const { mutate, isLoading } = useMutation({
-    onSuccess:()=> handleBookingSuccess(),
-    mutationFn: () => bookVisit(dateValue,selectedTime, propertyId, email,),
-    onError : ({response}) => toast.error(response.data.message),
-    onSettled : () => setOpened(false)
+    onSuccess: () => handleBookingSuccess(),
+    mutationFn: () => bookVisit(dateValue, selectedTime, propertyId, email,owner),
+    onError: ({ response }) => toast.error(response.data.message),
+    onSettled: () => setOpened(false)
   });
-
   const handleTimeChange = (event) => {
-    console.log("❤️👌",event.target.value)
-    console.log("❤️👌",dateValue)
-    setSelectedTime(event.target.value); // Update the selectedTime state when the value changes
+    console.log("❤️👌", event.target.value)
+    console.log("❤️👌", dateValue)
+    console.log("❤️👌",owner);
+    setSelectedTime(event.target.value);
   };
-
-  // console.log('propertyDetails:', propertyDetails);
-
-
-
-  // const timeSlots = propertyDetails.data || [];
   console.log('timeSlotszzzzzzzzz:', timeSlots);
-  // console.log('timeSlots type:', typeof timeSlots);
   return (
     <Modal className='slot-modal'
       opened={opened}
@@ -51,38 +44,17 @@ const BookingModal = ({ opened, setOpened, email, propertyId, availableTimes, ti
           placeholder="Date input"
         />
         {Array.isArray(timeSlots) && timeSlots?.length > 0 ? (
-             <select name="time" id="time" value={selectedTime} onChange={handleTimeChange}>
-             <option value="">Select a time</option>
-             {timeSlots.map((timeSlot, index) => (
-               <option key={index} value={timeSlot}>
-                 {timeSlot}
-               </option>
-             ))}
-           </select>
-          // <Select
-          //   label="Time"
-          //   placeholder="Select a time"
-          //   value={selectedTime}
-          //   onChange={(value) => setSelectedTime(value)}
-          // >
-          //   {
-          //     dummy && dummy.map((slot,ind)=>(
-          //       <Select.Option key={ind} value="hh">
-          //       BAM
-          //     </Select.Option>
-          //     ))
-          //   }
-          //   {/* {timeSlots.map((timeSlot, index) => (
-          //     <Select.Option key={index} value={timeSlot}>
-          //       {timeSlot}
-          //     </Select.Option>
-          //   ))}  */}
-          // </Select>
+          <select name="time" id="time" value={selectedTime} onChange={handleTimeChange}>
+            <option value="">Select a time</option>
+            {timeSlots.map((timeSlot, index) => (
+              <option key={index} value={timeSlot}>
+                {timeSlot}
+              </option>
+            ))}
+          </select>
         ) : (
           <p>No available times</p>
         )}
-
-
         <Button disabled={!dateValue || isLoading} onClick={() => mutate()}>
           Book Visit
         </Button>

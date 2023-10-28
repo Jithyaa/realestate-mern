@@ -1,99 +1,98 @@
 import axios from "axios";
 import dayjs from 'dayjs'
 import { toast } from "react-toastify";
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux"
 export const api = axios.create({
-    baseURL:"http://localhost:5000/api",
+  baseURL: "http://localhost:5000/api",
 })
 
-export const getAllProperties = async()=>{
-    
-    try {
-        const response = await api.get("/residency/allresidencies",{
-            timeout :10*1000,
-        });
-        
-        console.log("response",response);
+export const getAllProperties = async () => {
 
-        if(response.status=== 400 || response.status=== 500 ){
-            throw response.data;
-        }
-        return response.data;
+  try {
+    const response = await api.get("/residency/allresidencies", {
+      timeout: 10 * 1000,
+    });
 
-    } catch (error) {
-        toast.error("Something went wrong")
-        throw error
+    console.log("response", response);
+
+    if (response.status === 400 || response.status === 500) {
+      throw response.data;
     }
+    return response.data;
+
+  } catch (error) {
+    toast.error("Something went wrong")
+    throw error
+  }
 };
 
-export const getProperty = async(id)=>{
-    try {
-        const response = await api.get(`/residency/${id}`,{
-        });
-        if(response.status=== 400 || response.status=== 500 ){
-            throw response.data;
-        }
-        return response.data;
-
-    } catch (error) {
-        toast.error("Something went wrong")
-        throw error
+export const getProperty = async (id) => {
+  try {
+    const response = await api.get(`/residency/${id}`, {
+    });
+    if (response.status === 400 || response.status === 500) {
+      throw response.data;
     }
+    return response.data;
+
+  } catch (error) {
+    toast.error("Something went wrong")
+    throw error
+  }
 
 };
 
- 
 
-export const toFav=async(id,email,token)=>{
-    try {
-        await api.post(`/users/toFav/${id}`,
-        {
-            email,
-        },
-        {
-            headers:{
-                Authorization:`Bearer ${token}`,
-            }
+
+export const toFav = async (id, email, token) => {
+  try {
+    await api.post(`/users/toFav/${id}`,
+      {
+        email,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
         }
-        );
-    } catch (e) {
-        throw e;
-    }
+      }
+    );
+  } catch (e) {
+    throw e;
+  }
 };
 
 
 export const createResidency = async (data, token) => {
-    try{
-      const res = await api.post(
-        `/residency/create`,
-        {
-          data
+  try {
+    const res = await api.post(
+      `/residency/create`,
+      {
+        data
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-    }catch(error)
-    {
-      throw error
-    }
+      }
+    )
+  } catch (error) {
+    throw error
   }
+}
 
 
-export const bookVisit = async (dateValue, selectedTime, propertyId, email, token, timeSlots) => {
+export const bookVisit = async (dateValue, selectedTime, propertyId, email, token, timeSlots, owner) => {
+  console.log('bbbbbbbbbnnnnnnnnn',owner);
     try {
-      const formattedDate = dayjs(dateValue).format('DD/MM/YYYY');
-  
       await api.post(
         `/users/bookVisit/${propertyId}`,
         {
-            email,
+            userEmail:email,
             id: propertyId,
-            date: formattedDate,
+            date: new Date(dateValue),
             timeSlots: timeSlots,
             selectedTime: selectedTime,
+            ownerId:owner,
         },
         {
           headers: {
@@ -107,4 +106,27 @@ export const bookVisit = async (dateValue, selectedTime, propertyId, email, toke
       throw error;
     }
   };
-  
+
+
+// export const bookVisit = async (date, selectedTime, propertyId, token, id, userId, email) => {
+//   try {
+//     const formattedDate = dayjs(date).format('DD/MM/YYYY');
+
+//     const bookingData ={
+//       email,
+//       userId,
+//       residencyId:propertyId,
+//       date:formattedDate,
+//       ownerId:id,
+//       selectedTime,
+//     };
+//     await api.post( `/users/bookVisit/${propertyId}`,bookingData,{
+//       headers:{
+//         Authorization:`Bearer ${token}`,
+//       },
+//     });
+//   } catch (error) {
+//     console.error('An error occured :', error)
+//     throw error;
+//   }
+// };

@@ -45,11 +45,11 @@ const userSchema = mongoose.Schema({
         type:Boolean,
         default:false,
     },
-    bookedVisits: [
-        {
-          type: mongoose.Schema.Types.Mixed,
-        },
-      ],
+    // bookedVisits: [
+    //     {
+    //       type: mongoose.Schema.Types.Mixed,
+    //     },
+    //   ],
       favResidenciesID: [
         {
           type: mongoose.Schema.Types.ObjectId,

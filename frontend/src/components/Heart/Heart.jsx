@@ -8,19 +8,13 @@ import { setCredentials } from '../../slices/authSlice';
 
 const Heart = ({ id }) => {
   const [heartColor, setHeartColor] = useState('white');
-
   const dispatch = useDispatch();
-
-  // Access user info from Redux state
   const userInfo = useSelector((state) => state.auth);
-
   const { mutate } = useMutation({
     mutationFn: () =>
-      toFav(id, userInfo.email, userInfo.token), // Use userInfo to access email and token
+      toFav(id, userInfo.email, userInfo.token),
     onSuccess: () => {
-      // Dispatch an action to update favorites in the state
       const updatedFavourites = updateFavourites(id, userInfo.favourites);
-      // Use setCredentials action to update userInfo in Redux state
       dispatch(
         setCredentials({
           ...userInfo,
@@ -31,10 +25,9 @@ const Heart = ({ id }) => {
   });
 
   const handleLike = () => {
-    if (validateLogin) {
       mutate();
       setHeartColor((prev) => (prev === '#fa3e5f' ? 'white' : '#fa3e5f'));
-    }
+    
   };
 
   return (
@@ -48,5 +41,4 @@ const Heart = ({ id }) => {
     />
   );
 };
-
 export default Heart;

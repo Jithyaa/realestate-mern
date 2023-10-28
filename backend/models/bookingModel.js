@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
 const bookingSchema = mongoose.Schema({
-    residency: {
+    residencyId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Residency", 
 
     },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User", 
+    userEmail: {
+        type: String,
+        ref: "Residency", 
         
     },
     date: {
@@ -21,7 +21,7 @@ const bookingSchema = mongoose.Schema({
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User" 
+        ref: "Residency", 
     }
 }, {
     timestamps: true

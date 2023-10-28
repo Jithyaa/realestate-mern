@@ -145,7 +145,7 @@ const AdHomeScreen = () => {
 
       {
         openModal &&
-        <div className="modal-parent" style={{ position: "fixed", width: "100vw", height: "100vh", zIndex: "22", backgroundColor: "#463939ad", top: "0", left: "0", display: "grid", placeItems: "center" }}>
+        <div className="modal-parent" style={{ position: "fixed", width: "100vw", height: "130vh", zIndex: "22", backgroundColor: "#463939ad", top: "0", left: "0", display: "grid", placeItems: "center" }}>
           <i className="fa-solid fa-xmark" style={{ position: "absolute", top: "4rem", right: "4rem", fontSize: "2rem", color: "white", cursor: "pointer" }} onClick={() => setOpenModal(false)}></i>
           <div className="modal-child" style={{ backgroundColor: "white", width: "80%", padding: "20px", height: "50%", borderRadius: "12px", overflowY: "scroll", display: "flex", flexDirection: "column", gap: "1rem" }} >
             <div className="modal-heading"
