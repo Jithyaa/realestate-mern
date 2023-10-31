@@ -127,4 +127,33 @@
     cursor: pointer;
     transform: scale(1.1);
   }
+
+
+  /* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #dddada;
+  border-radius: 6px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #dddada;
+  border-radius: 6px;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #0b1f795b;
+  border-radius: 6px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0b1f796c;
+  border-radius: 6px;
+}
+
+
+
   

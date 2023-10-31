@@ -15,7 +15,7 @@
   }
   
   .chat-modal-content {
-    position: absolute;
+    position: fixed;
     top: 55%;
     right: 0;
     width: 400px;
@@ -59,7 +59,7 @@
   border-radius: 10px;
   margin-bottom:20px;
   margin-top: 10px;
-  height: 330px;
+  height: 330px ;
 }
 
 .owner-message {
@@ -81,20 +81,20 @@
 }
 .input-container{
   margin-top: 25px;
-  
+  position: sticky;
+  top: 0;
 }
 .chat-messages {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  
- 
 }
 .chat-messages-container {
   max-height: 300px; 
   overflow-y: auto; 
   scrollbar-width: thin; 
   padding-right: 10px;
+
   
 }
 .chat-messages-container::-webkit-scrollbar {
@@ -115,8 +115,12 @@
 
 .chat-messages-container::-webkit-scrollbar-track {
   background-color: #dfdcdc; 
+  border-radius: 5px;
 }
+
 
 .chat-messages-container::-webkit-scrollbar-track:hover {
   background-color: #e2dfdfc4; 
+  border-radius: 5px;
 }
+

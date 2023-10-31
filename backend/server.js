@@ -20,6 +20,10 @@ import residencyRoutes from './routes/residencyRoutes.js'
 
 import  morgan from "morgan";
 
+import { Server } from "socket.io";
+
+
+
 const app = express();
 
 app.use(cors({orgin:"http://localhost:3000",credentials:true}))
@@ -53,6 +57,28 @@ app.use(errorHandler);
 
 app.use(notFound);
 
+const server = app.listen(port, () =>
+  console.log(`server started on port ${port}`)
+);
 
+        // Socket.io initialisation //
 
-app.listen(port,()=>console.log(`server started on port ${port}`));
+ const io=new Server(server,{
+    cors:{
+        origin: "http://localhost:3000",
+        credentials: true
+    },
+ });
+ 
+ let onlineUsers=[];
+
+ io.on("connection",(socket)=>{
+    console.log(socket.id);
+
+    socket.on("disconnect",()=>{
+        console.log(socket.id)
+     })
+
+ })
+
+ 
