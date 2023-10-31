@@ -16,6 +16,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import ChatModal from '../components/ChatModal/ChatModal';
 const Property = () => {
 
   const { pathname } = useLocation()
@@ -27,6 +28,8 @@ const Property = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
   const [modalOpened, setModalOpened] = useState(false)
+  const [openChatModal, setOpenChatModal] = useState(false)
+  const [isChatOpen,setIsChatOpen]=useState(false)
 
   useEffect(() => {
     getProperty(id).then((data) => {
@@ -37,6 +40,16 @@ const Property = () => {
       });
 
   }, [id]);
+
+  const modalOpen = () => {
+    setOpenChatModal(true);
+    setIsChatOpen(true);
+  };
+
+  const modalClose = () => {
+    setOpenChatModal(false);
+    setIsChatOpen(false);
+  };
 
   function formatLargeNumber(number) {
     if (number >= 10000000) {
@@ -65,12 +78,23 @@ const Property = () => {
           <span>Error while fetching the Property details</span>
         </div>
       </div>
-
     )
   }
   return (
 
     <div className='wrapper'>
+      <div className='chat-button-sticky'>
+      <button onClick={isChatOpen ? modalClose : modalOpen} style={{ marginBottom: '1rem' }}>
+          {isChatOpen ? (
+            <i className="fa-solid fa-circle-xmark" style={{ fontSize: '1rem' }}></i>
+          ) : (
+            <i className="fa-brands fa-facebook-messenger" style={{ fontSize: '1rem' }}></i>
+          )}
+        </button>
+      </div>
+      <ChatModal isOpen={openChatModal} onClose={modalClose} />
+
+
       <div className='flexColStart paddings innerWidth property-container'>
         <div className="like">
           {/* <Heart /> */}
@@ -103,20 +127,9 @@ const Property = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-
-
-       
-
-
-
         <div className="flexCenter property-details">
-
-
           {/* left */}
-
           <div className='flexColStart left'>
-
-
             {/* head */}
 
             <div className='flexStart head'>
@@ -185,7 +198,6 @@ const Property = () => {
               owner={data?.owner}
               timeSlots={data?.timeSlots}
             />
-
           </div>
 
           {/* right side */}
@@ -197,9 +209,9 @@ const Property = () => {
               country={data?.country}
             />
           </div>
-
         </div>
       </div>
+
     </div>
   )
 }

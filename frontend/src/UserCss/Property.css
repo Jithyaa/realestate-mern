@@ -59,3 +59,20 @@
 .property-details .button:hover{
     transform: scale(1.05);
 }
+.chat-button-sticky {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000; /* Adjust z-index as needed to ensure it's above other elements */
+    background-color: #007bffb4;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
