@@ -53,7 +53,7 @@ const OtpVerification = () => {
             <h1>OTP Verification</h1>
 
             <div className="div1">
-              <label htmlFor="lastName">OTP</label>
+              <label htmlFor="lastName"></label>
               <input
                 type="text"
                 placeholder="Enter OTP"
@@ -65,7 +65,7 @@ const OtpVerification = () => {
 
             <div>
               {isLoading && <Loader />}
-              <button className="btn" type="submit">
+              <button  className="btn" type="submit">
                 SUBMIT
               </button>
             </div>

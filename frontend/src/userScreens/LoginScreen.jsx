@@ -63,11 +63,11 @@ const LoginScreen = () => {
           {isLoading && <Loader />}
           <button type="submit">SIGN IN</button>
         </form>
-        <div style={{ color: 'black', fontSize: '15px' }} className="py-3">
-          <b>Forgot Password?</b> <Link to="/forgot-password">Reset it here</Link>
+        <div style={{ color: 'black', fontSize: '17px' }} className="py-3">
+          <b>Forgot Password? </b> <Link style={{color:'hsl(240, 100%, 40%)'}} to="/forgot-password"><b>Reset it here</b></Link>
         </div>
-        <p style={{color:'black',fontSize:'17px'}} className="py-3"><b>Create an account?</b>
-           <Link to="/register">SIGN IN</Link>
+        <p style={{color:'black',fontSize:'18px'}} className="py-3"><b>Create an account? </b>
+           <Link style={{color:'hsl(240, 100%, 40%)'}} to="/register"><b>SIGN IN</b></Link>
         </p>
       </div>
     </div>

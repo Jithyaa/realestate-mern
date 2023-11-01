@@ -197,6 +197,7 @@ const Property = () => {
               email={userInfo?.email}
               owner={data?.owner}
               timeSlots={data?.timeSlots}
+              type={data?.type}
             />
           </div>
 

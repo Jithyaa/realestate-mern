@@ -8,7 +8,7 @@ const bookingSchema = mongoose.Schema({
     },
     userEmail: {
         type: String,
-        ref: "Residency", 
+        // ref: "Residency", 
         
     },
     date: {
@@ -19,9 +19,13 @@ const bookingSchema = mongoose.Schema({
         type: String,
 
     },
-    owner: {
+    ownerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Residency", 
+    },
+    type:{
+        type:String,
+        ref:"Residency",
     }
 }, {
     timestamps: true

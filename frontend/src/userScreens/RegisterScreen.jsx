@@ -105,8 +105,8 @@ const RegisterScreen = () => {
           {isLoading && <Loader />}
           <button type="submit" disabled={!!emailError}>SIGN UP</button>
         </form>
-        <p style={{ color: 'black' }} className="py-3"><b>Already have an account?</b>
-          <Link to="/login">SIGN IN</Link>
+        <p style={{ color: 'black' }} className="py-3"><b>Already have an account? </b>
+          <Link style={{color:'white'}} to="/login"><b>SIGN IN</b></Link>
         </p>
       </div>
     </div>

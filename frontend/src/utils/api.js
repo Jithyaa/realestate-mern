@@ -81,18 +81,25 @@ export const createResidency = async (data, token) => {
 }
 
 
-export const bookVisit = async (dateValue, selectedTime, propertyId, email, token, timeSlots, owner) => {
-  console.log('bbbbbbbbbnnnnnnnnn',owner);
+export const bookVisit = async (dateValue, selectedTime, propertyId, email, token) => {
     try {
+
+      const propertyDetails=await api.get(`/residency/${propertyId}`);
+
+      if(propertyDetails){
+        const {type,owner}=propertyDetails.data;
+      
+
       await api.post(
         `/users/bookVisit/${propertyId}`,
         {
             userEmail:email,
             id: propertyId,
             date: new Date(dateValue),
-            timeSlots: timeSlots,
+            // timeSlots: timeSlots,
             selectedTime: selectedTime,
             ownerId:owner,
+            type:type,
         },
         {
           headers: {
@@ -100,6 +107,7 @@ export const bookVisit = async (dateValue, selectedTime, propertyId, email, toke
           },
         }
       );
+    }
     } catch (error) {
       console.error('An error occurred:', error);
       toast.error('Something went wrong. Please try again.');

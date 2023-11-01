@@ -4,6 +4,7 @@ import User from '../models/userModel.js'
 import nodemailer from 'nodemailer';
 import Booking from '../models/bookingModel.js';
 import Residency from '../models/residencyModel.js'
+import mongoose from 'mongoose';
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -298,27 +299,29 @@ const resetPassword = asyncHandler(async (req, res) => {
 
 
 const bookVisit = async (req, res) => {
-  console.log("⭐⭐⭐⭐⭐😑", req.body);
+  console.log("🤷‍♂️🤷‍♂️🤷‍♂️🤷‍♂️", req.body);
  
-  const { userEmail, date, selectedTime , owner} = req.body;
+  const { userEmail, date, selectedTime ,ownerId,type} = req.body;
   const { id  } = req.params; // residency id //
 
   console.log("😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️", req.body.userEmail)
-  console.log("vvvvyyyy",owner);
   try {
-    const user = await Residency.findOne({ owner });
+    const residency = await Residency.findById(id);
 
-    // if (!user) {
-    //   res.status(404).json({ message: "User not found" });
-    //   return;
-    // }
+    if (!residency) {
+      res.status(404).json({ message: "Residency Not Found" });
+      return;
+    }
+
+    // const {type,owner} = residency;
 
     const newBooking = new Booking({
       userEmail,
       residencyId: id,  
       date,
       time: selectedTime,
-      ownerId:owner,
+      ownerId:ownerId,
+      type:type,
     });
 
     await newBooking.save();

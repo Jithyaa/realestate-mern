@@ -1,6 +1,3 @@
-/* UserCss/RegisterScreen.css */
-
-/* Container styles */
 
 .login-container {
   display: flex;
@@ -11,7 +8,10 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  padding-top: 0rem;
+  padding-bottom: 3.5rem;
+  margin-top: 3.6rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
 }
 
 /* Form container styles */

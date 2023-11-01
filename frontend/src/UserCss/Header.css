@@ -1,18 +1,17 @@
-/* Add this to your CSS file */
 .header-link {
-    margin-right: 10px; /* Add margin for spacing */
-    font-family: 'Roboto', sans-serif; /* Change the font family */
-    font-size: 20px; /* Change the font size */
-    color: #d4d4eb; /* Change the font color */
+    margin-right: 10px; 
+    font-family: 'Roboto', sans-serif; 
+    font-size: 20px;
+    color: #d4d4eb; 
     text-decoration: none; 
   }
   
   .header-link:hover {
     color: #23a2f6;
-    text-decoration: none; /* Remove underline on hover */
+    text-decoration: none; 
   }
   .custom-navbar {
-    height: 78px; /* Adjust the height as needed */
+    height: 78px; 
     background-color: rgba(32, 40, 129, 0.329);
     position: fixed !important;
     top: 0;
@@ -25,9 +24,11 @@
     font-size: 25px; 
     font-weight: bold; 
   }
-  
-  /* Style the Navbar.Brand on hover */
   .navbar-brand:hover {
-    text-decoration: none; /* Remove underline on hover */
+    text-decoration: none; 
   }
-  
+#username{
+  color: white;
+  text-decoration: none;
+  font-size:medium;
+}
