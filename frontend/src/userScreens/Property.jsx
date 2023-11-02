@@ -10,6 +10,7 @@ import { MdLocationPin, MdMeetingRoom } from 'react-icons/md';
 import { FaShower } from 'react-icons/fa';
 import Map from '../components/Map/Map.jsx';
 import BookingModal from '../components/BookingModal/BookingModal.jsx';
+import { Carousel } from 'react-responsive-carousel';
 import { Navigation, Pagination, Scrollbar, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';

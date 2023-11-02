@@ -1,5 +1,4 @@
 import axios from "axios";
-import dayjs from 'dayjs'
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux"
 export const api = axios.create({
@@ -110,7 +109,7 @@ export const bookVisit = async (dateValue, selectedTime, propertyId, email, toke
     }
     } catch (error) {
       console.error('An error occurred:', error);
-      toast.error('Something went wrong. Please try again.');
+      // toast.error('Something went wrong. Please try again.');
       throw error;
     }
   };
@@ -138,3 +137,24 @@ export const bookVisit = async (dateValue, selectedTime, propertyId, email, toke
 //     throw error;
 //   }
 // };
+
+export const removeBooking = async (id, email, token) => {
+  try {
+    await api.post(
+      `/user/removeBooking/${id}`,
+      {
+        email,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    toast.error("Something went wrong, Please try again");
+
+    throw error;
+  }
+};
+

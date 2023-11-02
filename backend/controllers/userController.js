@@ -108,7 +108,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-   
+
     if (req.file) {
       user.imagePath = req.file.filename || user.imagePath
     }
@@ -300,9 +300,8 @@ const resetPassword = asyncHandler(async (req, res) => {
 
 const bookVisit = async (req, res) => {
   console.log("🤷‍♂️🤷‍♂️🤷‍♂️🤷‍♂️", req.body);
- 
-  const { userEmail, date, selectedTime ,ownerId,type} = req.body;
-  const { id  } = req.params; // residency id //
+  const { userEmail, date, selectedTime, ownerId, type} = req.body;
+  const { id } = req.params; // residency id //
 
   console.log("😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️", req.body.userEmail)
   try {
@@ -313,15 +312,31 @@ const bookVisit = async (req, res) => {
       return;
     }
 
-    // const {type,owner} = residency;
+    const existingBooking = await Booking.find({
+      userEmail,
+      date,
+      time:selectedTime,
+    })
+    if(existingBooking.length > 0){
+      return res.status(400).json({ message: "You already have a booking at the same date and time" });
+    }
+
+    const existingBookingForSameProperty = await Booking.findOne({
+      userEmail,
+      residencyId:id,
+
+    });
+    if(existingBookingForSameProperty){
+      return res.status(400).json({ message: "You have already booked this property" });
+    }
 
     const newBooking = new Booking({
       userEmail,
-      residencyId: id,  
+      residencyId: id,
       date,
       time: selectedTime,
-      ownerId:ownerId,
-      type:type,
+      ownerId: ownerId,
+      type: type,
     });
 
     await newBooking.save();
@@ -334,87 +349,99 @@ const bookVisit = async (req, res) => {
 };
 
 
-
-
-
 const getAllBookings = asyncHandler(async (req, res) => {
-  const {email}=req.body
+  const { email } = req.body
   try {
-    const user = await User.findOne({email},'bookedVisits').exec();
-    if(!user){
-      return res.status(404).json({message:"User not found"});
+    const user = await User.findOne({ email }, 'bookedVisits').exec();
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user.bookedVisits);
   } catch (err) {
-    throw new Error(err.message)  
+    throw new Error(err.message)
   }
 })
 
-const cancelBooking = asyncHandler(async(req,res)=>{
-  const {email} = req.body;
-  const {id} = req.params;
-   try {
-    const user = await User.findOne({email},'bookedVisits').exec();
-
-    if(!user){
-      return res.status(404).json({message:"User not found"});
+const cancelBooking = asyncHandler(async (req, res) => {
+  const { bookingId } = req.params;
+  try {
+    const booking = await Booking.findById(bookingId);
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" })
     }
-
-    const index = user.bookedVisits.findIndex((visit)=>visit.id ===id);
-     if(index===-1){
-      return res.status(404).json({message:"Booking not found"});
-     }
-
-     user.bookedVisits.splice(index,1);
-
-     await User.updateOne({email},{$set:{bookedVisits : user.bookedVisits}}).exec();
-
-     res.send("Booking cancelled successfully");
-
-   } catch (err) {
-    throw new Error(err.message);
-   }
-
+    await Booking.findByIdAndDelete(bookingId);
+    res.json({ message: 'Booking cancelled successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
-const toFav = asyncHandler(async(req,res)=>{
-  const {email} = req.body;
-  const {rid} = req.params;
+// const cancelBooking = asyncHandler(async(req,res)=>{
+//   const {email} = req.body;
+//   const {id} = req.params;
+//    try {
+//     const user = await User.findOne({email},'bookedVisits').exec();
+
+//     if(!user){
+//       return res.status(404).json({message:"User not found"});
+//     }
+
+//     const index = user.bookedVisits.findIndex((visit)=>visit.id ===id);
+//      if(index===-1){
+//       return res.status(404).json({message:"Booking not found"});
+//      }
+
+//      user.bookedVisits.splice(index,1);
+
+//      await User.updateOne({email},{$set:{bookedVisits : user.bookedVisits}}).exec();
+
+//      res.send("Booking cancelled successfully");
+
+//    } catch (err) {
+//     throw new Error(err.message);
+//    }
+
+// });
+
+const toFav = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const { rid } = req.params;
 
   try {
-    const user = await User.findOne({email}).exec();
+    const user = await User.findOne({ email }).exec();
 
-    if(!user){
-      return res.status(404).json({message:"User not found"});
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
 
-    if(user.favResidenciesID.includes(rid)){
-      user.favResidenciesID = user.favResidenciesID.filter((id)=> id!==rid);
+    if (user.favResidenciesID.includes(rid)) {
+      user.favResidenciesID = user.favResidenciesID.filter((id) => id !== rid);
 
-    }else{
+    } else {
       user.favResidenciesID.push(rid);
     }
 
     const updateUser = await user.save();
 
-    if(user.favResidenciesID.includes(rid)){
-      res.send({message : "Added to favorites",user:updateUser});
-    }else{
-      res.send({message: "Removed from favorites",user:updateUser});
+    if (user.favResidenciesID.includes(rid)) {
+      res.send({ message: "Added to favorites", user: updateUser });
+    } else {
+      res.send({ message: "Removed from favorites", user: updateUser });
     }
   } catch (err) {
     throw new Error(err.message);
   }
 });
 
-const getAllFavorites = asyncHandler(async(req,res)=>{
-  const {email} =req.body;
+const getAllFavorites = asyncHandler(async (req, res) => {
+  const { email } = req.body;
 
   try {
-    const user = await User.findOne({email},'favResidenciesID').exec();
+    const user = await User.findOne({ email }, 'favResidenciesID').exec();
 
-    if(!user){
-      return res.status(404).json({message:"User not found"});
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
 
     res.status(200).json(user.favResidenciesID);
@@ -430,7 +457,7 @@ export {
   authUser, registerUser, logoutUser, getUserProfile,
   updateUserProfile, sendPasswordResetEmail, verifyOtp,
   resetPassword, verifyRegisterOtp, bookVisit, getAllBookings,
-  cancelBooking, toFav, getAllFavorites, 
+  cancelBooking, toFav, getAllFavorites,
 };
 
 

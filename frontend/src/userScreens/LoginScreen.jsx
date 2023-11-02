@@ -67,7 +67,7 @@ const LoginScreen = () => {
           <b>Forgot Password? </b> <Link style={{color:'hsl(240, 100%, 40%)'}} to="/forgot-password"><b>Reset it here</b></Link>
         </div>
         <p style={{color:'black',fontSize:'18px'}} className="py-3"><b>Create an account? </b>
-           <Link style={{color:'hsl(240, 100%, 40%)'}} to="/register"><b>SIGN IN</b></Link>
+           <Link style={{color:'hsl(240, 100%, 40%)'}} to="/register"><b>SIGN UP</b></Link>
         </p>
       </div>
     </div>

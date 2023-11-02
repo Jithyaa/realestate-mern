@@ -25,6 +25,7 @@ const BookingModal = ({ opened, setOpened, email, propertyId, availableTimes, ti
     console.log("❤️👌", dateValue)
     console.log("❤️👌",owner);
     console.log("❤️👌",type);
+
     setSelectedTime(event.target.value);
   };
   console.log('timeSlotszzzzzzzzz:', timeSlots);

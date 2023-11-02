@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AdminSideBar from '../components/AdminSideBar/AdminSideBar.jsx'
 import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
 import '../AdminCss/Dashboard.css';
+import axios from 'axios';
 
 
 const Dashboard = () => {
+
+    const [bookingCounts,setBookingCounts] = useState({ buy:0 , rent:0 });
+    const [userCount,setUserCount] = useState(0)
+    const [residencyCount,setResidencyCount] = useState(0)
 
     const chartSetting = {
         yAxis: [
@@ -23,20 +28,50 @@ const Dashboard = () => {
     };
 
     const dataset = [
-        {
-            buy: 4,
-            rent: 5,
-            month: 'Sep',
-        },
-        {
-            buy: 2,
-            rent: 1,
-            month: 'Oct',
-        },
+       {
+        buy : bookingCounts.buy,
+        rent : bookingCounts.rent,
+        month:'Nov'
+       }
     ];
+    console.log("😤😤😤😤😤",bookingCounts.buy)
+    console.log("😤😤😤😤😤",bookingCounts.rent)
 
 
     const valueFormatter = (value) => `${value}`;
+
+    const fetchBookingCounts = ()=>{
+        axios.post("http://localhost:5000/api/admin/count-booking").then((response)=>{
+            setBookingCounts(response.data);
+        })
+
+        .catch((error)=>{
+            console.error("Error fetching counts :", error);
+        });
+    };
+
+    useEffect(()=>{
+        fetchBookingCounts();
+        fetchUserCount();
+        fetchResidencyCount();
+    },[]);
+
+
+    const fetchUserCount = ()=>{
+        axios.post("http://localhost:5000/api/admin/count-user").then((response)=>{
+            setUserCount(response.data.userCount);
+        }).catch((error)=>{
+            console.error("Error fetching user count:", error);
+        });
+    };
+
+    const fetchResidencyCount = ()=>{
+        axios.post("http://localhost:5000/api/admin/count-residency").then((response)=>{
+            setResidencyCount(response.data.residencyCount);
+        }).catch((error)=>{
+            console.error("Error fetching residency count:", error);
+        });
+    };
 
     return (
         <main className='main-container'>
@@ -48,23 +83,23 @@ const Dashboard = () => {
                 <div className='card'>
                     <div className='card-inner'>
                         <h4>Total Users</h4>
-                        <i class="fa-solid fa-user"></i>
+                        <i className="fa-solid fa-user"></i>
                     </div>
-                    <h1>2</h1>
+                    <h1>{userCount}</h1>
                 </div>
                 <div className='card'>
                     <div className='card-inner'>
                         <h4>Total Bookings </h4>
-                        <i class="fa-solid fa-book-open"></i>
+                        <i className="fa-solid fa-book-open"></i>
                     </div>
-                    <h1>12</h1>
+                    <h1>{bookingCounts.buy + bookingCounts.rent}</h1>
                 </div>
                 <div className='card'>
                     <div className='card-inner'>
                         <h4>Total Residencies</h4>
-                        <i class="fa-solid fa-house"></i>
+                        <i className="fa-solid fa-house"></i>
                     </div>
-                    <h1>4</h1>
+                    <h1>{residencyCount}</h1>
                 </div>
             </div>
             <div className='charts'>
