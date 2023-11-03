@@ -113,35 +113,12 @@ export const bookVisit = async (dateValue, selectedTime, propertyId, email, toke
       throw error;
     }
   };
-
-
-// export const bookVisit = async (date, selectedTime, propertyId, token, id, userId, email) => {
-//   try {
-//     const formattedDate = dayjs(date).format('DD/MM/YYYY');
-
-//     const bookingData ={
-//       email,
-//       userId,
-//       residencyId:propertyId,
-//       date:formattedDate,
-//       ownerId:id,
-//       selectedTime,
-//     };
-//     await api.post( `/users/bookVisit/${propertyId}`,bookingData,{
-//       headers:{
-//         Authorization:`Bearer ${token}`,
-//       },
-//     });
-//   } catch (error) {
-//     console.error('An error occured :', error)
-//     throw error;
-//   }
-// };
+  
 
 export const removeBooking = async (id, email, token) => {
   try {
     await api.post(
-      `/user/removeBooking/${id}`,
+      `/users/removeBooking/${id}`,
       {
         email,
       },
@@ -154,6 +131,46 @@ export const removeBooking = async (id, email, token) => {
   } catch (error) {
     toast.error("Something went wrong, Please try again");
 
+    throw error;
+  }
+};
+
+export const getOwnedProperties = async (userEmail, token) => {
+  try {
+    const res = await api.post(
+      `/users/ownedProperties`,
+      {
+        email: userEmail,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return res.data; 
+  } catch (error) {
+    toast.error("Something went wrong while fetching bookings");
+    throw error
+  }
+};
+
+export const getBookings = async(userEmail,token)=>{
+  try {
+    const response = await api.post(
+      `/users/bookings`,
+      {
+        userEmail
+      },
+      {
+        headers:{
+          Authorization:`Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
     throw error;
   }
 };

@@ -42,12 +42,13 @@ const PropertyCard = ({ card }) => {
         <button
           className="secondaryText r-type"
           style={{
-            fontSize:'1rem',
             backgroundColor: 'green', 
             color: 'white', 
-            borderRadius: '4px', 
-            padding: '5px 10px', 
-            cursor: 'pointer', 
+            borderRadius: '6px', 
+            padding: '4px 15px', 
+            width:'4rem',
+            
+
           }}
         >
           {card.type}

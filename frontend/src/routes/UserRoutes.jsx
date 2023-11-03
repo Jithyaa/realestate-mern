@@ -14,7 +14,10 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import Property from "../userScreens/Property.jsx";
 import Website from "../pages/Website.jsx";
 import Residencies from "../userScreens/Residencies.jsx";
+import OwnerResidencies from '../userScreens/OwnerResidencies.jsx'
 import { useState } from "react";
+import Bookings from "../userScreens/Bookings.jsx";
+
 
 
 const UserRoutes = () => {
@@ -38,6 +41,8 @@ const UserRoutes = () => {
                     <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/otp-verification" element={<OtpVerification />} />
                     <Route path="/rental-tools" element={<RentalTools/>}/>
+                    <Route path="/my-residencies" element={<OwnerResidencies/>}/>
+                    <Route path="/bookings" element={<Bookings/>}/>
                     <Route path="/" element={<Website/>}/>
                     <Route path="/properties" >
                         <Route index element={<Properties />} />

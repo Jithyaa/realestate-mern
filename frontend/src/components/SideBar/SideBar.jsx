@@ -27,11 +27,11 @@ const SideBar = () => {
 
           <ul className="dropdown-content">
             <li>
-              <Link to="/profile">Bookings</Link>
+              <Link to="/bookings">Bookings</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/profile">Favourites</Link>
-            </li>
+            </li> */}
             {/* Add more options as needed */}
           </ul>
         </li>

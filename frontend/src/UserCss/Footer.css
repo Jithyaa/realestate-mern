@@ -1,0 +1,29 @@
+.footer{
+    background: rgba(88, 88, 88, 0.507);
+    padding-top: 50px;
+}
+.footer__bottom{
+    border-top: 1px solid rgb(49, 49, 49);
+}
+.section__description{
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+.footer__link-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .office__info {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  @media (min-width: 992px) {
+    .footer .col-lg-4 {
+      margin-bottom: 1.5rem;
+    }
+  
+    .footer .col-lg-2 {
+      margin-bottom: 1.5rem;
+    }
+  }

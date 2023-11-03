@@ -270,34 +270,6 @@ const resetPassword = asyncHandler(async (req, res) => {
 
 // book visit to residency //
 
-// const bookVisit = async (req, res) => {
-//   console.log("⭐⭐⭐⭐⭐😑",req.body);
-//   const { email, date, selectedTime } = req.body;
-//   const { id } = req.params;   // residency id //
-
-//   try {
-//     const user = await User.findOne({ email });
-
-//     if (!user) {
-//       res.status(404).json({ message: "User not found" });
-//       return;
-//     }
-
-//     if (user.bookedVisits.some((visit) => visit.id === id)) {
-//       res.status(400).json({ message: "This residency is already booked by you" });
-//     } else {
-//       user.bookedVisits.push({ id, date, selectedTime });
-//       await user.save();
-//       res.send("Your visit is booked successfully");
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// };
-
-
-
 const bookVisit = async (req, res) => {
   console.log("🤷‍♂️🤷‍♂️🤷‍♂️🤷‍♂️", req.body);
   const { userEmail, date, selectedTime, ownerId, type} = req.body;
@@ -349,18 +321,18 @@ const bookVisit = async (req, res) => {
 };
 
 
-const getAllBookings = asyncHandler(async (req, res) => {
-  const { email } = req.body
+const getOwnedProperties = asyncHandler(async (req, res) => {
   try {
-    const user = await User.findOne({ email }, 'bookedVisits').exec();
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-    res.status(200).json(user.bookedVisits);
-  } catch (err) {
-    throw new Error(err.message)
+    const { userEmail } = req.params;
+    const residency = await Residency.find({ userEmail }).populate('residencyId')
+    res.status(200).json(residency);
+    console.log("zzzzzzzzzzz",residency)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 })
+
 
 const cancelBooking = asyncHandler(async (req, res) => {
   const { bookingId } = req.params;
@@ -377,32 +349,6 @@ const cancelBooking = asyncHandler(async (req, res) => {
   }
 });
 
-// const cancelBooking = asyncHandler(async(req,res)=>{
-//   const {email} = req.body;
-//   const {id} = req.params;
-//    try {
-//     const user = await User.findOne({email},'bookedVisits').exec();
-
-//     if(!user){
-//       return res.status(404).json({message:"User not found"});
-//     }
-
-//     const index = user.bookedVisits.findIndex((visit)=>visit.id ===id);
-//      if(index===-1){
-//       return res.status(404).json({message:"Booking not found"});
-//      }
-
-//      user.bookedVisits.splice(index,1);
-
-//      await User.updateOne({email},{$set:{bookedVisits : user.bookedVisits}}).exec();
-
-//      res.send("Booking cancelled successfully");
-
-//    } catch (err) {
-//     throw new Error(err.message);
-//    }
-
-// });
 
 const toFav = asyncHandler(async (req, res) => {
   const { email } = req.body;
@@ -452,12 +398,27 @@ const getAllFavorites = asyncHandler(async (req, res) => {
 });
 
 
+const getBookings =asyncHandler (async(req,res)=>{
+  const {userEmail} = req.params;
+  try {
+    const bookings = await Booking.find({userEmail});
+    res.status(200).json(bookings);
+    console.log("eeeeeeeeeee",userEmail)
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
+
 
 export {
   authUser, registerUser, logoutUser, getUserProfile,
   updateUserProfile, sendPasswordResetEmail, verifyOtp,
-  resetPassword, verifyRegisterOtp, bookVisit, getAllBookings,
-  cancelBooking, toFav, getAllFavorites,
+  resetPassword, verifyRegisterOtp, bookVisit, getOwnedProperties,
+  cancelBooking, toFav, getAllFavorites, getBookings, 
 };
 
 

@@ -5,8 +5,8 @@ const router = express.Router();
 import { authUser,registerUser,logoutUser,getUserProfile,
          updateUserProfile, sendPasswordResetEmail,
          verifyOtp,resetPassword,verifyRegisterOtp,
-         bookVisit,getAllBookings,cancelBooking,toFav,
-         getAllFavorites,
+         bookVisit,getOwnedProperties,cancelBooking,toFav,
+         getAllFavorites,getBookings
         } from '../controllers/userController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
@@ -43,10 +43,11 @@ router.post('/otp-verification',verifyRegisterOtp);
 // residency booking route //
 
 router.post("/bookVisit/:id",bookVisit)
-router.post("/allBookings",getAllBookings)
+router.post("/ownedProperties/:userEmail",getOwnedProperties)
 router.post("/removeBooking/:id",cancelBooking)
 router.post("/toFav/:rid",toFav)
 router.post("/allFav/",getAllFavorites)
+router.post("/bookings/:userEmail",getBookings)
 
 
 

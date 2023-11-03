@@ -5,6 +5,7 @@ import Header from './components/Header'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import AdminHeader from './components/AdminHeader';
+import Footer from './components/Footer'
 
 
 
@@ -18,6 +19,7 @@ const App = () => {
       <ToastContainer/>
       {/* <Container className="my-2"> */}
       <Outlet modified={modified}/>
+      <Footer/>
       {/* </Container> */}
      
     </>

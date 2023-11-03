@@ -57,7 +57,7 @@ const Property = () => {
       return (number / 10000000).toFixed(1) + ' Cr';
     } else if (number >= 100000) {
       return (number / 100000).toFixed(1) + ' Lakh';
-    } else {
+    } else  {
       return number.toString();
     }
   }
@@ -110,7 +110,7 @@ const Property = () => {
             disableOnInteraction: false
           }}
           spaceBetween={10}
-          slidesPerView={3}
+          slidesPerView={4}
           centeredSlides={true}
           zoom={false}
           navigation

@@ -44,7 +44,7 @@ const Properties = ({modified}) => {
   if (!Array.isArray(data.residencies) || data.residencies.length === 0) {
     return (
       <div className='wrapper'>
-        <span>No properties found</span> 
+        <img style={{width:'50%',height:'auto',marginLeft:'350px',marginTop:'120px'}} src="https://support.rentastic.io/wp-content/uploads/2020/07/add_property.png" alt="" />
       </div>
     );
   }
