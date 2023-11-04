@@ -137,7 +137,7 @@ export const removeBooking = async (id, email, token) => {
 
 export const getOwnedProperties = async (userEmail, token) => {
   try {
-    const res = await api.post(
+    const res = await api.get(
       `/users/ownedProperties`,
       {
         email: userEmail,
@@ -157,7 +157,7 @@ export const getOwnedProperties = async (userEmail, token) => {
 
 export const getBookings = async(userEmail,token)=>{
   try {
-    const response = await api.post(
+    const response = await api.get(
       `/users/bookings`,
       {
         userEmail

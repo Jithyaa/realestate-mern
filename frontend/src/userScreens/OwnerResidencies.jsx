@@ -42,7 +42,7 @@ const OwnedResidencies = () => {
     if (filteredData.length === 0) {
         return (
           <div className='wrapper'>
-            <h4 style={{marginTop:'300px',marginLeft:'530px'}}>No Residencies Yet...!</h4>
+            <h4 style={{marginTop:'290px',marginLeft:'530px'}}>No Residencies Yet...!</h4>
           </div>
         );
       }

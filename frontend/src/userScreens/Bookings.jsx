@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { getBookings } from '../utils/api';
 import PropertyCard from '../components/propertyCard/PropertyCard';
-
 const Bookings = () => {
     const {userInfo} = useSelector((state)=>state.auth);
     const [userBookings,setUserBookings] = useState([]);
@@ -27,7 +26,7 @@ const Bookings = () => {
             )}
           </div>
         </div>
-      );
+      );    
 }
 
 export default Bookings

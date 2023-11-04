@@ -20,7 +20,7 @@ const UploadImage = ({ propertyDetails, setPropertyDetails, nextStep, prevStep }
         cloudName: "dkvlosdyw",
         uploadPreset: "ektlpubi",
         multiple:true,
-        maxFiles: 5, // Define the maximum number of files allowed
+        maxFiles: 5, 
       },
       (err, results) => {
         console.log("🤦‍♂️🤦‍♂️🤦‍♂️🤦‍♂️🤦‍♂️🤦‍♂️",results)
@@ -38,11 +38,9 @@ const UploadImage = ({ propertyDetails, setPropertyDetails, nextStep, prevStep }
         }
       }
     );
-  }, []); // Initialize the Cloudinary widget when the component mounts
+  }, []); 
 
   
-
-  // Handle the removal of an image from the array
   const removeImage = (index) => {
     const updatedImages = [...imageURLs];
     updatedImages.splice(index, 1);
@@ -61,7 +59,7 @@ const UploadImage = ({ propertyDetails, setPropertyDetails, nextStep, prevStep }
           ))}
       </div>
 
-      {imageURLs.length < 5 && ( // Limit the number of images to 5, you can adjust it as needed
+      {imageURLs.length < 5 && ( 
         <div
           className="flexColCenter uploadZone"
           onClick={() => widgetRef.current?.open()}

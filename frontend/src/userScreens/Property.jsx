@@ -57,10 +57,14 @@ const Property = () => {
       return (number / 10000000).toFixed(1) + ' Cr';
     } else if (number >= 100000) {
       return (number / 100000).toFixed(1) + ' Lakh';
-    } else  {
+    } else if (number >= 1000) {
+      return (number / 1000).toFixed(1) + ' Thousand';
+    } else {
       return number.toString();
     }
   }
+  
+  
 
   if (isLoading) {
     return (
@@ -84,7 +88,7 @@ const Property = () => {
   return (
 
     <div className='wrapper'>
-      <div className='chat-button-sticky'>
+      {/* <div className='chat-button-sticky'>
       <button onClick={isChatOpen ? modalClose : modalOpen} style={{ marginBottom: '1rem' }}>
           {isChatOpen ? (
             <i className="fa-solid fa-circle-xmark" style={{ fontSize: '1rem' }}></i>
@@ -93,7 +97,7 @@ const Property = () => {
           )}
         </button>
       </div>
-      <ChatModal isOpen={openChatModal} onClose={modalClose} />
+      <ChatModal isOpen={openChatModal} onClose={modalClose} /> */}
 
 
       <div className='flexColStart paddings innerWidth property-container'>

@@ -43,11 +43,11 @@ router.post('/otp-verification',verifyRegisterOtp);
 // residency booking route //
 
 router.post("/bookVisit/:id",bookVisit)
-router.post("/ownedProperties/:userEmail",getOwnedProperties)
+router.get("/ownedProperties/:userEmail",getOwnedProperties)
 router.post("/removeBooking/:id",cancelBooking)
 router.post("/toFav/:rid",toFav)
 router.post("/allFav/",getAllFavorites)
-router.post("/bookings/:userEmail",getBookings)
+router.get("/bookings/:userEmail",getBookings)
 
 
 

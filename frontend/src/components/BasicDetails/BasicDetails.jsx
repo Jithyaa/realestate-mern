@@ -1,12 +1,12 @@
 import { useForm } from '@mantine/form'
 import React, { useState } from 'react'
 import { validateString } from '../../utils/common'
-import { Box, Button, Group, NumberInput, TextInput, Textarea,Select } from '@mantine/core';
+import { Box, Button, Group, NumberInput, TextInput, Textarea, Select } from '@mantine/core';
 
 const BasicDetails = ({ prevStep, nextStep, propertyDetails, setPropertyDetails }) => {
 
-    const [priceValue,setPriceValue] = useState('');
-    const [priceUnit,setPriceUnit] = useState( 'Cr');
+    const [priceValue, setPriceValue] = useState('');
+    const [priceUnit, setPriceUnit] = useState('Cr');
 
     const form = useForm({
         initialValues: {
@@ -14,7 +14,7 @@ const BasicDetails = ({ prevStep, nextStep, propertyDetails, setPropertyDetails 
             description: propertyDetails.description,
             type: propertyDetails.type || 'Buy',
             priceValue: priceValue,
-            priceUnit:priceUnit,
+            priceUnit: priceUnit,
 
 
         },
@@ -25,8 +25,8 @@ const BasicDetails = ({ prevStep, nextStep, propertyDetails, setPropertyDetails 
         },
     });
 
-    console.log("🥶🥶🥶🥶🥶🥶🥶🥶🥶",priceValue);
-    console.log("☠️☠️☠️☠️☠️☠️☠️☠️☠️",priceUnit);
+    console.log("🥶🥶🥶🥶🥶🥶🥶🥶🥶", priceValue);
+    console.log("☠️☠️☠️☠️☠️☠️☠️☠️☠️", priceUnit);
 
     const { title, description, type, price } = form.values
 
@@ -75,19 +75,19 @@ const BasicDetails = ({ prevStep, nextStep, propertyDetails, setPropertyDetails 
 
                         form.setFieldValue("priceValue", newValue);
 
-                         setPriceValue(newValue)
+                        setPriceValue(newValue)
                         form.setFieldValue("price", price);
                     }}
-                    />
+                />
 
                 <Select
-                label='Price Unit'
-                data={['Cr','Lakh']}
-                value={propertyDetails.priceUnit || 'Cr'}
-                onChange={(value) => {
-                    setPriceUnit(value)
-                }}
-                
+                    label='Price Unit'
+                    data={['Cr', 'Lakh', 'Thousand']}
+                    onChange={(value) => {
+                        setPriceUnit(value);
+                        form.setFieldValue("priceUnit", value);
+                        form.setFieldValue("price", `${priceValue} ${value}`);
+                    }}
                 />
                 <Group position='center' mt="xl">
                     <Button variant='default' onClick={prevStep}>Back</Button>

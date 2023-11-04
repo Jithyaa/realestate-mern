@@ -5,7 +5,7 @@ import Header from './components/Header'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import AdminHeader from './components/AdminHeader';
-import Footer from './components/Footer'
+import Footer from '../src/components/Footer';
 
 
 
@@ -13,13 +13,15 @@ const App = () => {
   const location=useLocation();
   const [modified,setModified] = useState(false);
   const isAdminPage = location.pathname.startsWith('/admin')
+ 
   return (
     <>
       {isAdminPage ? <AdminHeader/> : <Header setModified={setModified}/>}
+
       <ToastContainer/>
       {/* <Container className="my-2"> */}
       <Outlet modified={modified}/>
-      <Footer/>
+      {!isAdminPage && <Footer/>}
       {/* </Container> */}
      
     </>

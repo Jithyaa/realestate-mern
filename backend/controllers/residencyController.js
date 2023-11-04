@@ -9,7 +9,13 @@ const createResidency = asyncHandler(async (req, res) => {
       console.log("rrrrrrrrrr👌👌",req.body.data)
       let rate = price.split(" ")
        
-      const numericPrice = !isNaN(parseFloat(rate[0])) ? (rate[1]=== 'Cr' ? parseFloat(rate[0]) * 10000000 : parseFloat(rate[0]) * 100000) : 0 ;
+      const numericPrice = !isNaN(parseFloat(rate[0])) ? (
+        rate[1] === 'Cr' ? parseFloat(rate[0]) * 10000000 :
+        rate[1] === 'Lakh' ? parseFloat(rate[0]) * 100000 :
+        rate[1] === 'Thousand' ? parseFloat(rate[0]) * 1000 :
+        parseFloat(rate[0])
+      ) : 0;
+      
 
     let savedResidency;
     const newResidency = await Residency.create({

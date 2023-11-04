@@ -1,6 +1,7 @@
 .footer{
     background: rgba(88, 88, 88, 0.507);
     padding-top: 50px;
+    margin-top: 2rem;
 }
 .footer__bottom{
     border-top: 1px solid rgb(49, 49, 49);
