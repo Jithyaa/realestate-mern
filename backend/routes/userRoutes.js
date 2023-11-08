@@ -8,7 +8,9 @@ import { authUser,registerUser,logoutUser,getUserProfile,
          bookVisit,getOwnedProperties,cancelBooking,toFav,
          getAllFavorites,getBookings
         } from '../controllers/userController.js';
+
 import { protect } from '../middleware/authMiddleware.js';
+import { addMessage, createChat, createChatRoom,rooms, showMessages } from '../controllers/chatController.js';
 
 
 router.post('/',registerUser)
@@ -46,8 +48,13 @@ router.post("/bookVisit/:id",bookVisit)
 router.get("/ownedProperties/:userEmail",getOwnedProperties)
 router.post("/removeBooking/:id",cancelBooking)
 router.post("/toFav/:rid",toFav)
-router.post("/allFav/",getAllFavorites)
+router.post("/allFav",getAllFavorites)
 router.get("/bookings/:userEmail",getBookings)
+router.post("/create-chat",createChat)
+router.post("/create-chat-room",createChatRoom)
+router.get("/rooms",rooms)
+router.post("/add-message",addMessage)
+router.get("/show-messages",showMessages)
 
 
 

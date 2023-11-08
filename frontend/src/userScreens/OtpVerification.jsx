@@ -15,11 +15,11 @@ const OtpVerification = () => {
   const { userInfo } = useSelector((state) => state.auth);
   console.log(userInfo);
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate("/");
-    }
-  }, [navigate, userInfo]);
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     navigate("/login");
+  //   }
+  // }, [navigate, userInfo]);
 
   const tempInfo = localStorage.getItem("tempInfo");
   const userEmail =  JSON.parse(tempInfo) ; // Check if tempInfo is null
@@ -36,9 +36,11 @@ const OtpVerification = () => {
       if (res.error) {
         toast.error("Wrong OTP");
       } else {
-        dispatch(setCredentials({ ...res }));
-        toast.success("Account successfully created");
-        navigate("/");
+        // dispatch(setCredentials({ ...res }));
+        toast.success("Account created");
+        // toast.success("po mone dineshaaaaa");
+        navigate('/login')
+        
       }
     } catch (err) {
       console.error(err);

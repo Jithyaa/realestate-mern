@@ -18,6 +18,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import ChatModal from '../components/ChatModal/ChatModal';
+import axios from 'axios';
+import { createChatRoom } from '../utils/api';
+
+
 const Property = () => {
 
   const { pathname } = useLocation()
@@ -28,9 +32,11 @@ const Property = () => {
   console.log("heyyyyyyyyyyyyyyyyyyyyyy ", data)
 
   const { userInfo } = useSelector((state) => state.auth);
+  console.log({userInfo});
   const [modalOpened, setModalOpened] = useState(false)
   const [openChatModal, setOpenChatModal] = useState(false)
   const [isChatOpen,setIsChatOpen]=useState(false)
+  const [chatRoomId,setChatRoomId]=useState()
 
   useEffect(() => {
     getProperty(id).then((data) => {
@@ -42,9 +48,12 @@ const Property = () => {
 
   }, [id]);
 
-  const modalOpen = () => {
+  const modalOpen = async () => {
+    console.log("🐩🐩🐩",userInfo._id);
     setOpenChatModal(true);
-    setIsChatOpen(true);
+    setIsChatOpen(true)
+    setChatRoomId(await createChatRoom(userInfo?._id,data?.owner,data._id))
+    
   };
 
   const modalClose = () => {
@@ -85,19 +94,27 @@ const Property = () => {
       </div>
     )
   }
+  console.log({isChatOpen});
   return (
 
     <div className='wrapper'>
-      {/* <div className='chat-button-sticky'>
-      <button onClick={isChatOpen ? modalClose : modalOpen} style={{ marginBottom: '1rem' }}>
-          {isChatOpen ? (
-            <i className="fa-solid fa-circle-xmark" style={{ fontSize: '1rem' }}></i>
-          ) : (
-            <i className="fa-brands fa-facebook-messenger" style={{ fontSize: '1rem' }}></i>
-          )}
-        </button>
-      </div>
-      <ChatModal isOpen={openChatModal} onClose={modalClose} /> */}
+     
+       <div className='chat-button-sticky'>
+       <button onClick={isChatOpen ? modalClose : modalOpen} style={{ marginBottom: '1rem' }}>
+           {isChatOpen ? (
+             <i className="fa-solid fa-circle-xmark" style={{ fontSize: '1rem' }}></i>
+           ) : (
+             <i className="fa-brands fa-facebook-messenger" style={{ fontSize: '1rem' }}></i>
+           )}
+         </button>
+       </div>
+    
+      {isChatOpen?<ChatModal 
+      isOpen={openChatModal} 
+      onClose={modalClose}
+      ownerId={data?.owner}
+      chatRoomId={chatRoomId}
+       /> :null}
 
 
       <div className='flexColStart paddings innerWidth property-container'>

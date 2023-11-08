@@ -21,7 +21,7 @@ const App = () => {
       <ToastContainer/>
       {/* <Container className="my-2"> */}
       <Outlet modified={modified}/>
-      {!isAdminPage && <Footer/>}
+      {/* {!isAdminPage && <Footer/>} */}
       {/* </Container> */}
      
     </>

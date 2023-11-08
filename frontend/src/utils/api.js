@@ -175,3 +175,90 @@ export const getBookings = async(userEmail,token)=>{
   }
 };
 
+export const createChat = async(userId,ownerId,message,token)=>{
+  try {
+    const response = await api.post(
+      `/users/create-chat`,
+      {
+        userId,
+        ownerId,
+        message,
+      },
+      {
+        headers:{
+          Authorization:`Bearer ${token}`,
+        },
+      }
+    );
+
+    if(response.status === 200){
+      return response.data;
+    }else{
+      throw response.data;
+    }
+  } catch (error) {
+    toast.error('Something went wrong');
+    throw error;
+  }
+};
+
+export const createChatRoom = async(userId,ownerId,rid)=>{
+  console.log("🐍🐍🐍🐍",userId,ownerId,rid);
+  try {
+    const response = await api.post(
+      `users/create-chat-room`,
+      {
+        userId,
+        ownerId,
+        rid
+      }
+    )
+    return response.data.id;
+    
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const rooms =async(id)=>{
+  try {
+    const response = await api.get(
+      `users/rooms`,
+      {
+       params:{ id:id}
+      } 
+    )
+return response.data.dt
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const addMessage=async(message,chatId,id)=>{
+  try {
+    const response = await api.post(
+      `users/add-message`,{
+        message,
+        roomId:chatId,
+        id,
+      }
+    )
+    return response.data.success
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+export const showMessages =async(id)=>{
+  try {
+    const response = await api.get(
+      `users/show-messages`,{
+       params:{id:id}
+      }
+    )
+    return response.data.messages
+  } catch (error) {
+    console.log(error);
+  }
+};

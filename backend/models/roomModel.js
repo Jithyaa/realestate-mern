@@ -8,8 +8,12 @@ const ChatRoomSchema = mongoose.Schema({
     },
     ownerId:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Residency',
+        ref:'User',
         required:true,
+    },
+    residencyId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Residency",
     }
 
 },{

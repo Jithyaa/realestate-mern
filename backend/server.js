@@ -70,15 +70,24 @@ const server = app.listen(port, () =>
     },
  });
  
- let onlineUsers=[];
 
- io.on("connection",(socket)=>{
-    console.log(socket.id);
+io.on("connection", (socket) => {
+  console.log("Socket connected:", socket.id);
 
-    socket.on("disconnect",()=>{
-        console.log(socket.id)
-     })
+  socket.on("joinRoom", (roomId) => {
+    console.log({roomId});
+    socket.join(roomId);
+  });
 
- })
+  socket.on("sendMessage", (roomId, message) => {
+    console.log({message});
+    console.log({roomId});
+    io.to(roomId).emit("message", message);
+  });
+
+ socket.on("disconnect", () => {
+    console.log("We are disconnected");
+  });
+});
 
  
