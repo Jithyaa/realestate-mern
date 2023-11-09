@@ -66,11 +66,12 @@ const server = app.listen(port, () =>
         // Socket.io initialisation //
 
  const io=new Server(server,{
-    cors:{
-        origin: "http://localhost:3000",
-        credentials: true
+    pingTimeout:60000,
+    cors: {
+      origin: "*",
     },
  });
+ 
 
 io.on("connection", (socket) => {
   console.log("Socket connected:", socket.id);
