@@ -122,7 +122,6 @@ const propUnlist = asyncHandler(async (req, res) => {
     owner.unList = true;
     await owner.save();
     res.status(200).json({ success: "Modified" })
-    // console.log(owner);
   } catch (error) {
     console.log(error)
     res.status(200).json({ error: "Something Went Wrong" })
@@ -137,7 +136,6 @@ const propList = asyncHandler(async (req, res) => {
     owner.unList = false;
     await owner.save();
     res.status(200).json({ success: "Modified" })
-    // console.log(owner);
   } catch (error) {
     console.log(error)
     res.status(200).json({ error: "Something Went Wrong" })
@@ -187,9 +185,6 @@ const countResidency = asyncHandler(async(req,res)=>{
     
   }
 })
-
-
-
 
 export { authAdmin, logoutAdmin, userData, blockUser, unblockUser, 
          residencyList, ownerFetching, propUnlist, propList, countBooking,

@@ -1,4 +1,9 @@
+.main-container{
+overflow: hidden;
+overflow-y: hidden;
+overflow-x: hidden;
 
+}
 .login-container {
   display: flex;
   justify-content: center;

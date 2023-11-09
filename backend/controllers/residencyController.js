@@ -6,9 +6,8 @@ const createResidency = asyncHandler(async (req, res) => {
   try {
     const { title, description, price,address, country, city,
       facilities, images, type, timeSlots,userInfoId } = req.body.data; 
-      console.log("rrrrrrrrrr👌👌",req.body.data)
       let rate = price.split(" ")
-       
+  
       const numericPrice = !isNaN(parseFloat(rate[0])) ? (
         rate[1] === 'Cr' ? parseFloat(rate[0]) * 10000000 :
         rate[1] === 'Lakh' ? parseFloat(rate[0]) * 100000 :
@@ -32,41 +31,12 @@ const createResidency = asyncHandler(async (req, res) => {
       timeSlots,
       owner: userInfoId,
     });
-
-    // try {
-    //   // savedResidency = await newResidency.save();
-    //   console.log("😒",newResidency)
-    // } catch (error) {
-    //   if (error.code === 11000) { 
-    //     // Handle duplicate key error (duplicate address)
-    //     return res.status(400).json({ message: "A residency with this address already exists" });
-    //   } else {
-    //     console.error('Error creating residency:', error);
-    //     console.error(error);
-    //     throw new Error('Error creating residency');
-    //   }
-    // }
-
-    // console.log("New Residency:", savedResidency);
     res.status(201).json({ message: "Residency created successfully", newResidency });
 
   } catch (err) {
     res.status(500).json({ message: err.message, error: err.message });
   }
 });
-
-
-// const getAllResidencies = asyncHandler(async(req,res)=>{
-//   try {
-//     const residencies = await Residency.find().sort({createdAt:'desc'})
-//     .exec();
-//     res.json(residencies);
-
-//   } catch (err) {
-//     res.status(500).json({message: "Internal server error", error:err.message});
-//   }
-
-// });
 
 
 const getAllResidencies = asyncHandler(async (req, res) => {
@@ -128,8 +98,6 @@ const getResidency = asyncHandler(async(req,res)=>{
   }
 
 })
-
-
 
 
 export { createResidency,getAllResidencies,getResidency}

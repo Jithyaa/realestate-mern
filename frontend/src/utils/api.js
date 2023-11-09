@@ -41,8 +41,6 @@ export const getProperty = async (id) => {
 
 };
 
-
-
 export const toFav = async (id, email, token) => {
   try {
     await api.post(`/users/toFav/${id}`,
@@ -109,7 +107,6 @@ export const bookVisit = async (dateValue, selectedTime, propertyId, email, toke
     }
     } catch (error) {
       console.error('An error occurred:', error);
-      // toast.error('Something went wrong. Please try again.');
       throw error;
     }
   };
@@ -130,7 +127,6 @@ export const removeBooking = async (id, email, token) => {
     );
   } catch (error) {
     toast.error("Something went wrong, Please try again");
-
     throw error;
   }
 };
@@ -203,7 +199,6 @@ export const createChat = async(userId,ownerId,message,token)=>{
 };
 
 export const createChatRoom = async(userId,ownerId,rid)=>{
-  console.log("🐍🐍🐍🐍",userId,ownerId,rid);
   try {
     const response = await api.post(
       `users/create-chat-room`,
@@ -256,8 +251,14 @@ export const showMessages =async(id)=>{
       `users/show-messages`,{
        params:{id:id}
       }
-    )
-    return response.data.messages
+    );
+    const messageWithTime = response.data.messages.map(message=>({
+      ...message,
+      timestamp : new Date(message.timestamp).toLocaleTimeString()
+    }));
+
+    return messageWithTime;
+
   } catch (error) {
     console.log(error);
   }

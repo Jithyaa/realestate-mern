@@ -10,9 +10,6 @@ import { setCredentials } from '../slices/authSlice';
 import { useUpdateUserMutation } from '../slices/usersApiSlices';
 import SideBar from '../components/SideBar/SideBar.jsx';
 import '../UserCss/Profile.css'
-
-
-
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -24,10 +21,8 @@ const ProfileScreen = () => {
   const [number, setNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { userInfo } = useSelector((state) => state.auth)
   const [updateProfile, { isLoading }] = useUpdateUserMutation()
 

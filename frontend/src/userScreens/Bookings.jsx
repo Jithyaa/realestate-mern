@@ -13,7 +13,6 @@ const Bookings = () => {
             console.error(error));
         }
     },[userInfo])
-    console.log("mmmmmmmmmmmmmm",userInfo);
     return (
         <div className='wrapper'>
           <div className='flexColCenter paddings innerWidth properties-container'>

@@ -18,19 +18,15 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import ChatModal from '../components/ChatModal/ChatModal';
-import axios from 'axios';
 import { createChatRoom } from '../utils/api';
 
 
 const Property = () => {
-
   const { pathname } = useLocation()
   const id = pathname.split("/").slice(-1)[0]
   const { data, isLoading, isError } = useQuery(["resd", id], () =>
     getProperty(id)
   );
-  console.log("heyyyyyyyyyyyyyyyyyyyyyy ", data)
-
   const { userInfo } = useSelector((state) => state.auth);
   console.log({userInfo});
   const [modalOpened, setModalOpened] = useState(false)
@@ -49,11 +45,9 @@ const Property = () => {
   }, [id]);
 
   const modalOpen = async () => {
-    console.log("🐩🐩🐩",userInfo._id);
     setOpenChatModal(true);
     setIsChatOpen(true)
     setChatRoomId(await createChatRoom(userInfo?._id,data?.owner,data._id))
-    
   };
 
   const modalClose = () => {
@@ -73,8 +67,6 @@ const Property = () => {
     }
   }
   
-  
-
   if (isLoading) {
     return (
       <div className='wrapper'>
@@ -96,9 +88,7 @@ const Property = () => {
   }
   console.log({isChatOpen});
   return (
-
     <div className='wrapper'>
-     
        <div className='chat-button-sticky'>
        <button onClick={isChatOpen ? modalClose : modalOpen} style={{ marginBottom: '1rem' }}>
            {isChatOpen ? (
@@ -116,13 +106,10 @@ const Property = () => {
       chatRoomId={chatRoomId}
        /> :null}
 
-
       <div className='flexColStart paddings innerWidth property-container'>
         <div className="like">
           {/* <Heart /> */}
         </div>
-
-        {/* <img src={data?.image} alt="home image" /> */}
 
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, Autoplay]}

@@ -23,10 +23,12 @@ import  morgan from "morgan";
 import { Server } from "socket.io";
 
 
-
 const app = express();
 
-app.use(cors({orgin:"http://localhost:3000",credentials:true}))
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+}));
 
 app.use(morgan('tiny'));
 
@@ -69,7 +71,6 @@ const server = app.listen(port, () =>
         credentials: true
     },
  });
- 
 
 io.on("connection", (socket) => {
   console.log("Socket connected:", socket.id);

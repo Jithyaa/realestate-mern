@@ -271,11 +271,8 @@ const resetPassword = asyncHandler(async (req, res) => {
 // book visit to residency //
 
 const bookVisit = async (req, res) => {
-  console.log("🤷‍♂️🤷‍♂️🤷‍♂️🤷‍♂️", req.body);
   const { userEmail, date, selectedTime, ownerId, type} = req.body;
   const { id } = req.params; // residency id //
-
-  console.log("😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️", req.body.userEmail)
   try {
     const residency = await Residency.findById(id);
 
@@ -326,7 +323,6 @@ const getOwnedProperties = asyncHandler(async (req, res) => {
     const { userEmail } = req.params;
     const residency = await Residency.find({ userEmail }).populate('residencyId')
     res.status(200).json(residency);
-    console.log("zzzzzzzzzzz",residency)
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
@@ -362,6 +358,7 @@ const toFav = asyncHandler(async (req, res) => {
     }
 
     if (user.favResidenciesID.includes(rid)) {
+
       user.favResidenciesID = user.favResidenciesID.filter((id) => id !== rid);
 
     } else {
@@ -371,6 +368,7 @@ const toFav = asyncHandler(async (req, res) => {
     const updateUser = await user.save();
 
     if (user.favResidenciesID.includes(rid)) {
+
       res.send({ message: "Added to favorites", user: updateUser });
     } else {
       res.send({ message: "Removed from favorites", user: updateUser });
@@ -403,16 +401,12 @@ const getBookings =asyncHandler (async(req,res)=>{
   try {
     const bookings = await Booking.find({userEmail});
     res.status(200).json(bookings);
-    console.log("eeeeeeeeeee",userEmail)
     
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-
-
-
 
 export {
   authUser, registerUser, logoutUser, getUserProfile,

@@ -1,7 +1,5 @@
-import React, { useState,useSelector } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-// import Loader from '../components/Loader';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../UserCss/ForgotScreen.css'
 import { toast } from 'react-toastify';
 

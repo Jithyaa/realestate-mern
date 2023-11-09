@@ -6,8 +6,6 @@ import adminReducer from './adminSlices/authSlice'
 
 import { apiSlice } from './slices/apiSlice';
 
-
-
 const rootReducer = combineReducers({
     auth: authReducer,
     admin: adminReducer,

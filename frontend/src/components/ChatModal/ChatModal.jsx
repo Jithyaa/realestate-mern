@@ -11,12 +11,9 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId }) => {
   const [messageInput, setMessageInput] = useState('');
   const [chatRooms, setChatRooms] = useState([])
   const [currentRoomId, setCurrentRoomId] = useState()
-
   const { userInfo } = useSelector((state) => state.auth);
 
-  console.log("bbbbbbbbbbbbbb", chatRoomId);
-
-
+  console.log("chatRoomId", chatRoomId);
   useEffect(() => {
     async function run() {
       setChatRooms(await rooms(userInfo._id))
@@ -25,7 +22,6 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId }) => {
     const newSocket = io(import.meta.env.VITE_SERVER_URL, { transports: ['websocket'] });
     setSocket(newSocket);
     newSocket.on('message', (message) => {
-      console.log("🐷🐷🐷🐷");
       setChatMessages((prevMessages) => [...prevMessages, message])
     });
     return () => {
@@ -46,7 +42,6 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId }) => {
       };
       await addMessage(newMessage.message, currentRoomId, newMessage.sender,)
       socket.emit('sendMessage', currentRoomId, newMessage);
-      // setChatMessages((prevMessages)=>[...prevMessages,newMessage]);
       setMessageInput('');
     }
 
@@ -60,7 +55,6 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId }) => {
   useEffect(() => {
     async function run() {
       setChatMessages(await showMessages(currentRoomId))
-      // console.log(await showMessages(currentRoomId));
     }
     run()
     if (socket && currentRoomId) {
@@ -95,6 +89,7 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId }) => {
                       className={message.sender === userInfo?._id ? 'user-message' : 'owner-message'}
                     >
                       {message.message}
+                      <span className='time-stamp'>{message.timestamp}</span>
                     </div>
                   ))
                 ) : (

@@ -48,12 +48,6 @@ const Header = ({setModified}) => {
                   <Nav.Link href='/properties' className='header-link' style={{color:'white'}}>
                     Residencies
                   </Nav.Link>
-                  {/* <Nav.Link href='/buy' className='header-link'>
-                    Buy
-                  </Nav.Link>
-                  <Nav.Link href='/rent' className='header-link'>
-                    Rent
-                  </Nav.Link> */}
                   <Nav.Link href='' className='header-link' style={{color:'white'}} onClick={handleAddPropertyClick}>
                     Add your Property
                   </Nav.Link>
@@ -72,8 +66,6 @@ const Header = ({setModified}) => {
                 </>
               ) : (
                 <>
-                  {/* <Nav.Link href='/login'>Sign In</Nav.Link>
-                  <Nav.Link href='/register'>Sign Up</Nav.Link> */}
                 </>
               )}
             </Nav>

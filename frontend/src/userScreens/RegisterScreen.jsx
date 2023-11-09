@@ -12,12 +12,10 @@ const RegisterScreen = () => {
   const [number, setNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
   const [emailError, setEmailError] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { userInfo } = useSelector((state) => state.auth);
   const [register, { isLoading }] = useRegisterMutation();
 
@@ -57,9 +55,6 @@ const RegisterScreen = () => {
       setEmailError('');
     }
   };
-
-
-
   return (
     <div className="register-container">
       <div className="form-container">
@@ -76,7 +71,6 @@ const RegisterScreen = () => {
             type="email"
             placeholder="Email Address"
             value={email}
-            // onChange={(e) => setEmail(e.target.value)}
             onChange={handleEmailChange}
             required
           />

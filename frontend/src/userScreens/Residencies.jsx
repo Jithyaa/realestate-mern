@@ -53,8 +53,6 @@ const Residencies = () => {
 
 export default Residencies;
 
-
-
 const SlideNextButton = () => {
     const swiper = useSwiper();
     return (

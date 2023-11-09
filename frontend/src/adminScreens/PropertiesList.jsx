@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios from '../axioss'
 import Slider from 'react-slick'
 import Loader from '../components/Loader'
 import '../AdminCss/PropertiesList.css'
@@ -15,7 +15,7 @@ const PropertiesList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/admin/residencies").then((response) => {
+    axios.get("/admin/residencies").then((response) => {
       setResidency([...response.data]);
       setLoading(false);
     }).catch((error) => {

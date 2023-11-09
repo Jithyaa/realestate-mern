@@ -3,7 +3,7 @@ import AdminSideBar from '../components/AdminSideBar/AdminSideBar.jsx'
 import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts';
 import '../AdminCss/Dashboard.css';
-import axios from 'axios';
+import axios from '../axioss'
 
 
 const Dashboard = () => {
@@ -41,7 +41,7 @@ const Dashboard = () => {
     const valueFormatter = (value) => `${value}`;
 
     const fetchBookingCounts = ()=>{
-        axios.post("http://localhost:5000/api/admin/count-booking").then((response)=>{
+        axios.get("/admin/count-booking").then((response)=>{
             setBookingCounts(response.data);
         })
 
@@ -58,7 +58,7 @@ const Dashboard = () => {
 
 
     const fetchUserCount = ()=>{
-        axios.post("http://localhost:5000/api/admin/count-user").then((response)=>{
+        axios.post("/admin/count-user").then((response)=>{
             setUserCount(response.data.userCount);
         }).catch((error)=>{
             console.error("Error fetching user count:", error);
@@ -66,7 +66,7 @@ const Dashboard = () => {
     };
 
     const fetchResidencyCount = ()=>{
-        axios.post("http://localhost:5000/api/admin/count-residency").then((response)=>{
+        axios.post("/admin/count-residency").then((response)=>{
             setResidencyCount(response.data.residencyCount);
         }).catch((error)=>{
             console.error("Error fetching residency count:", error);

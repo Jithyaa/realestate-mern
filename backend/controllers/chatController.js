@@ -37,10 +37,8 @@ const createChat = asyncHandler(async (req, res) => {
 const createChatRoom = asyncHandler(async(req,res)=>{
     try {
         const { userId,ownerId,rid} =req.body;
-        console.log("👽👽👽👽👽",req.body);
         let data= await ChatRoom.findOne({userId : userId, ownerId:ownerId,residencyId:rid})
         if(data){
-            console.log("wooowwwwwww");
             return res.status(200).send({id:data._id})
         }else{
           if(userId && ownerId && rid){
@@ -54,7 +52,6 @@ const createChatRoom = asyncHandler(async(req,res)=>{
 });
 const rooms = asyncHandler(async(req,res)=>{
     try {
-        console.log('☠️😶‍🌫️');
        let {id}=req.query;
        let data= await ChatRoom.find(
         {
@@ -84,7 +81,7 @@ const addMessage = asyncHandler(async(req,res)=>{
         console.log(err)
         res.status(500).send(err)
     }
-})
+});
 const showMessages = asyncHandler(async(req,res)=>{
     let {id} = req.query;
     try{
@@ -96,10 +93,7 @@ const showMessages = asyncHandler(async(req,res)=>{
         console.log(err)
         res.status(500).send(err)
     }
-})
-
-
-
+});
 
 
 export { createChat, createChatRoom, rooms,addMessage,showMessages}

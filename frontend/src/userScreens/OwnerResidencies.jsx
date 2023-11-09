@@ -5,13 +5,10 @@ import { useSelector } from 'react-redux';
 import PropertyCard from '../components/propertyCard/PropertyCard';
 import Search from '../components/Search';
 
-
-
 const OwnedResidencies = () => {
     const { data, isError, isLoading } = useProperties();
     const [filter, setFilter] = useState("")
     const { userInfo } = useSelector((state) => state.auth);
-
     if (isError) {
         return (
             <div className='wrapper'>
@@ -27,8 +24,6 @@ const OwnedResidencies = () => {
             </div>
         );
     }
-
-    
 
     const filteredData = data.residencies
     .filter((property) =>
@@ -46,8 +41,6 @@ const OwnedResidencies = () => {
           </div>
         );
       }
-
-
     return (
 
         <div className='wrapper'>

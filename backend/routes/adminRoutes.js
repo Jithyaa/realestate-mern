@@ -13,7 +13,7 @@ router.get('/residencies',residencyList)
 router.get('/owner-fetching',ownerFetching)
 router.post('/prop-unlist',propUnlist)
 router.post('/prop-list',propList)
-router.post('/count-booking',countBooking)
+router.get('/count-booking',countBooking)
 router.post('/count-user',countUser)
 router.post('/count-residency',countResidency)
 

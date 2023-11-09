@@ -1,9 +1,9 @@
 import { Container, Card, Table } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import '../AdminCss/homeScreen.css';
 import {toast} from "react-toastify";
 import AdminSideBar from '../components/AdminSideBar/AdminSideBar.jsx';
+import axios from '../axioss'
 
 const AdHomeScreen = () => {
   const [users, setUsers] = useState([]);
@@ -12,7 +12,7 @@ const AdHomeScreen = () => {
   const [owner, setOwner] = useState([])
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/admin/user").then((response) => {
+    axios.get("/admin/user").then((response) => {
       setUsers([...response.data]);
     }).catch((error) => {
       console.log(error);
@@ -28,7 +28,7 @@ const AdHomeScreen = () => {
     }
 
     try {
-      const response = await axios.put(`http://localhost:5000/api/admin/${isBlocked ? 'unblock' : 'block'}/${userId}`);
+      const response = await axios.put(`/admin/${isBlocked ? 'unblock' : 'block'}/${userId}`);
       if (response.status === 200) {
         console.log(response.data.message);
         // Update the user list after successful block/unblock
@@ -121,7 +121,7 @@ const AdHomeScreen = () => {
                         border: '1px solid green'
                       }}
                       onClick={async () => {
-                        let { data } = await axios.get("http://localhost:5000/api/admin/owner-fetching", {
+                        let { data } = await axios.get("/admin/owner-fetching", {
                           params: {
                             id: user._id
                           }
@@ -191,7 +191,7 @@ const AdHomeScreen = () => {
           <div className="actions-modal">
             {ele.unList ? 
               <button  style={{backgroundColor:"green"}} onClick={async()=>{
-                let response = await axios.post("http://localhost:5000/api/admin/prop-list",{
+                let response = await axios.post("/admin/prop-list",{
                   id:ele._id
                 })
                 if(response.data.error) toast.error(response.data.error)
@@ -199,7 +199,7 @@ const AdHomeScreen = () => {
                 setOpenModal(false)
               }}>List</button> :
               <button onClick={async()=>{
-                let response = await axios.post("http://localhost:5000/api/admin/prop-unlist",{
+                let response = await axios.post("/admin/prop-unlist",{
                   id:ele._id
                 })
                 if(response.data.error) toast.error(response.data.error)

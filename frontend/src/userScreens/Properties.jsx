@@ -15,8 +15,6 @@ const Properties = ({modified}) => {
   },[modified])
   const itemsPerPage = 8; 
 
-  
-  console.log("jjjjjjjjjjjjjjjjjjjjjjjjj 😊",data)
   const [filter, setFilter] = useState(""); 
 
   const handlePageClick = (selectedPage) => {
@@ -39,7 +37,6 @@ const Properties = ({modified}) => {
       </div>
     );
   }
-
   
   if (!Array.isArray(data.residencies) || data.residencies.length === 0) {
     return (
@@ -52,7 +49,6 @@ const Properties = ({modified}) => {
   
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-
 
   const filteredData = data.residencies
     .filter((property) =>
@@ -79,7 +75,6 @@ const Properties = ({modified}) => {
         previousClassName="pagination-previous"
         nextClassName="pagination-next"
         pageClassName="pagination-page"
-        // forcePage={currentPage.current-1}
       />
     </div>
   );
