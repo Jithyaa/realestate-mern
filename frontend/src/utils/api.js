@@ -2,7 +2,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux"
 export const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: import.meta.env.VITE_SERVER_URL+"/api",
 })
 
 export const getAllProperties = async () => {
