@@ -9,8 +9,7 @@ import connectDB from "./config/db.js";
 
 import cors from 'cors'
 
-connectDB();
-
+ 
 const port = process.env.PORT || 5000;
 import userRoutes from './routes/userRoutes.js'
 
@@ -22,7 +21,7 @@ import  morgan from "morgan";
 
 import { Server } from "socket.io";
 
-
+import connectDB from "./config/db.js";
 const app = express();
 
 app.use(cors({
@@ -59,11 +58,21 @@ app.use(errorHandler);
 
 app.use(notFound);
 
-const server = app.listen(port, () =>
-  console.log(`server started on port ${port}`)
-);
+connectDB()
+  .then(() => {
+    try {
+      app.listen(port, () => {
+        console.log(`The server is running at port number ${port} `);
+      });
+    } catch (err) {
+      console.log("Cannot Connect to the server", err);
+    }
+  })
+  .catch((err) => {
+    console.log("Invalid Database Connection !!", err);
+  });
 
-        // Socket.io initialisation //
+  // Socket.io initialisation //
 
  const io=new Server(server,{
     pingTimeout:60000,
