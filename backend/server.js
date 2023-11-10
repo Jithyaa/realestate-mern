@@ -21,7 +21,7 @@ import  morgan from "morgan";
 
 import { Server } from "socket.io";
 
-import connectDB from "./config/db.js";
+ 
 const app = express();
 
 app.use(cors({
