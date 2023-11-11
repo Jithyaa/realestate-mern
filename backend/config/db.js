@@ -1,18 +1,8 @@
-// import mongoose from "mongoose";
 
-// const connectDB = async () => {
-//     try {
-//         const conn= await mongoose.connect(process.env.MONGO_URI);
-//         console.log(`MongoDB Connected: ${conn.connection.host}`);
-//     } catch (error) {
-//         console.error(`Error: ${error.message}`)
-//         process.exit(1);
-//     }
-// }
 
 import mongoose from "mongoose";
 
 
 export default async function connectDB(){
-    const db = await mongoose.connect(process.env.MONGO_URI)
+    const db = await mongoose.connect("mongodb+srv://jithya1504:jithya1504@realestate.tknsywo.mongodb.net/realestate?retryWrites=true&w=majority")
 }

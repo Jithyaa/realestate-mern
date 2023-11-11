@@ -5,4 +5,4 @@ const instance = axios.create({
   baseURL: 'http://13.127.252.69:5000/api',
 });
 
-export default instance;
+export default instance;  
