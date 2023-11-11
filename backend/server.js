@@ -10,7 +10,7 @@ import connectDB from "./config/db.js";
 import cors from 'cors'
 import http from "http";
  
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 7000;
 import userRoutes from './routes/userRoutes.js'
 
 import adminRoutes from './routes/adminRoutes.js'
