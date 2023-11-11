@@ -8,7 +8,7 @@ import { notFound,errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
 
 import cors from 'cors'
-
+import http from "http";
  
 const port = process.env.PORT || 5000;
 import userRoutes from './routes/userRoutes.js'
@@ -24,6 +24,7 @@ import { Server } from "socket.io";
  
 const app = express();
 
+const server = http.createServer(app);
 app.use(cors({
   origin: "http://localhost:3000",
   credentials: true,
@@ -45,13 +46,26 @@ app.use('/api/admin',adminRoutes);
 
 app.use('/api/residency',residencyRoutes)
 
-if(process.env.NODE_ENV === 'production'){
-    const __dirname = path.resolve();
-    app.use(express.static(path.join(__dirname, 'frontend/dist')));
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve();
+  const basePath = path.dirname(__dirname);
+  app.use(express.static(path.join(basePath, "frontend/dist")));
 
-    app.get('*',(req,res) => res.sendFile(path.resolve(__dirname, 'frontend', 'dist','index.html')));
+  app.get("*", function (req, res) {
+    const indexPath = path.join(basePath, "frontend/dist/index.html");
+
+    res.sendFile(indexPath, function (err) {
+      if (err) {
+        console.error("Error sending index.html:", err);
+        res.status(500).send(err);
+      } else {
+        console.log("Index.html send successfully");
+      } 
+    });  
+  });
+  
 }else{
-    app.get('/',(req,res)=>res.send('server is ready'));
+  console.log("Great")
 }
 
 app.use(errorHandler);
@@ -61,7 +75,7 @@ app.use(notFound);
 connectDB()
   .then(() => {
     try {
-      app.listen(port, () => {
+      server.listen(port, () => {
         console.log(`The server is running at port number ${port} `);
       });
     } catch (err) {
