@@ -8,7 +8,7 @@ export default defineConfig({
     port:3000,
     proxy:{
       '/api':{
-        target:'http://www.jithya.online',
+        target:'https://www.jithya.online',
         changeOrigin:true
       }
     }
