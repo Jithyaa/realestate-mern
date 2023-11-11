@@ -55,6 +55,8 @@ const RegisterScreen = () => {
       setEmailError('');
     }
   };
+
+
   return (
     <div className="register-container">
       <div className="form-container">

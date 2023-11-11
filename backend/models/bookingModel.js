@@ -11,6 +11,11 @@ const bookingSchema = mongoose.Schema({
         // ref: "Residency", 
         
     },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User", 
+
+    },
     date: {
         type: Date,
        

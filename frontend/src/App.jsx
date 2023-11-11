@@ -13,7 +13,9 @@ const App = () => {
   const location=useLocation();
   const [modified,setModified] = useState(false);
   const isAdminPage = location.pathname.startsWith('/admin')
- 
+  const isLoginPage = location.pathname.startsWith('/login')
+  const isRegisterPage = location.pathname.startsWith('/register')
+ console.log("😤😤",(!isAdminPage&&!isLoginPage&&!isRegisterPage))
   return (
     <>
       {isAdminPage ? <AdminHeader/> : <Header setModified={setModified}/>}
@@ -21,7 +23,8 @@ const App = () => {
       <ToastContainer/>
       {/* <Container className="my-2"> */}
       <Outlet modified={modified}/>
-      {/* {!isAdminPage && <Footer/>} */}
+      {(!isAdminPage && !isLoginPage &&!isRegisterPage) && <Footer/>}
+  
       {/* </Container> */}
      
     </>

@@ -271,7 +271,8 @@ const resetPassword = asyncHandler(async (req, res) => {
 // book visit to residency //
 
 const bookVisit = async (req, res) => {
-  const { userEmail, date, selectedTime, ownerId, type} = req.body;
+  const { userEmail, date, selectedTime, ownerId, type,userId} = req.body;
+  console.log("⭐⭐",req.body)
   const { id } = req.params; // residency id //
   try {
     const residency = await Residency.findById(id);
@@ -284,6 +285,7 @@ const bookVisit = async (req, res) => {
     const existingBooking = await Booking.find({
       userEmail,
       date,
+      userId,
       time:selectedTime,
     })
     if(existingBooking.length > 0){
@@ -292,6 +294,7 @@ const bookVisit = async (req, res) => {
 
     const existingBookingForSameProperty = await Booking.findOne({
       userEmail,
+      userId,
       residencyId:id,
 
     });
@@ -301,11 +304,12 @@ const bookVisit = async (req, res) => {
 
     const newBooking = new Booking({
       userEmail,
+      userId,
       residencyId: id,
       date,
       time: selectedTime,
-      ownerId: ownerId,
-      type: type,
+      ownerId,
+      type,
     });
 
     await newBooking.save();

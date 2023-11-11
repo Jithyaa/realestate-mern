@@ -78,7 +78,8 @@ export const createResidency = async (data, token) => {
 }
 
 
-export const bookVisit = async (dateValue, selectedTime, propertyId, email, token) => {
+export const bookVisit = async (dateValue, selectedTime, propertyId, email, token,userId) => {
+  console.log("😶‍🌫️😶‍🌫️",userId )
     try {
 
       const propertyDetails=await api.get(`/residency/${propertyId}`);
@@ -91,12 +92,14 @@ export const bookVisit = async (dateValue, selectedTime, propertyId, email, toke
         `/users/bookVisit/${propertyId}`,
         {
             userEmail:email,
+            userId,
             id: propertyId,
             date: new Date(dateValue),
             // timeSlots: timeSlots,
             selectedTime: selectedTime,
             ownerId:owner,
             type:type,
+            
         },
         {
           headers: {
@@ -215,12 +218,12 @@ export const createChatRoom = async(userId,ownerId,rid)=>{
   }
 };
 
-export const rooms =async(id)=>{
+export const rooms =async(id,rid)=>{
   try {
     const response = await api.get(
       `users/rooms`,
       {
-       params:{ id:id}
+       params:{ id:id,rid}
       } 
     )
 return response.data.dt

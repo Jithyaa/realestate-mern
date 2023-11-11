@@ -27,6 +27,7 @@ const app = express();
 const server = http.createServer(app);
 app.use(cors({
   origin: "https://www.jithya.online:5000",
+  // origin: "http://localhost:3000",
   credentials: true,
 }));
 

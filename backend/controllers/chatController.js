@@ -42,8 +42,10 @@ const createChatRoom = asyncHandler(async(req,res)=>{
             return res.status(200).send({id:data._id})
         }else{
           if(userId && ownerId && rid){
+           if(userId !== ownerId){
             let data2= await ChatRoom.create({userId:userId,ownerId:ownerId,residencyId:rid});
             return res.status(200).send({id:data2._id})
+           }
           }
         }
     } catch (error) {
@@ -52,15 +54,20 @@ const createChatRoom = asyncHandler(async(req,res)=>{
 });
 const rooms = asyncHandler(async(req,res)=>{
     try {
-       let {id}=req.query;
+       let {id,rid}=req.query;
        let data= await ChatRoom.find(
         {
-            $or: [
-                { userId:id},
-                { ownerId:id},
-            ],
-        }).populate({path:'residencyId',select:'title images'})
-       console.log({data});
+            $and: [
+                { residencyId: rid },
+                {
+                  $or: [
+                    { userId: id },
+                    { ownerId: id },
+                  ],
+                },
+              ],
+        }).populate([{path:'residencyId',select:'title images'},{path:'ownerId',select:'name'},{path:'userId',select:'name'}])
+
        return res.status(200).send({dt:data})
     } catch (error) {
         console.log(error);

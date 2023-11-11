@@ -4,8 +4,14 @@ import { FaPaperPlane } from 'react-icons/fa';
 import { io } from 'socket.io-client'
 import { useSelector } from 'react-redux';
 import { addMessage, rooms, showMessages } from '../../utils/api';
-
-const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId }) => {
+function check(id,obj){
+  if(id == obj.userId._id){
+    return obj.ownerId.name
+  }else if(id == obj.ownerId._id){
+    return obj.userId.name
+  }
+}
+const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId ,rid}) => {
   const [socket, setSocket] = useState(null);
   const [chatMessages, setChatMessages] = useState([]);
   const [messageInput, setMessageInput] = useState('');
@@ -13,10 +19,10 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId }) => {
   const [currentRoomId, setCurrentRoomId] = useState()
   const { userInfo } = useSelector((state) => state.auth);
 
-  console.log("chatRoomId", chatRoomId);
+
   useEffect(() => {
     async function run() {
-      setChatRooms(await rooms(userInfo._id))
+      setChatRooms(await rooms(userInfo._id,rid))
     }
     run()
     const newSocket = io(import.meta.env.VITE_SERVER_URL, { transports: ['websocket'] });
@@ -72,7 +78,8 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId }) => {
               <div className='chat-room-img'>
                 <img src={ele.residencyId.images[0]} alt="" />
               </div>
-              <p>{ele.residencyId.title}</p>
+              {/* <p>{ele.residencyId.title}</p> */}
+              <p>{check(userInfo?._id,ele)}</p>
             </div>
           ))}
         </div>

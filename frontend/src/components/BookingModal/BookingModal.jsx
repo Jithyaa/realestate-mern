@@ -7,7 +7,7 @@ import { bookVisit } from '../../utils/api.js';
 import { toast } from 'react-toastify';
 import '../BookingModal/BookingModal.css'
 
-const BookingModal = ({ opened, setOpened, email, propertyId, availableTimes, timeSlots,owner,type }) => {
+const BookingModal = ({ opened, setOpened, email, propertyId, availableTimes, timeSlots,owner,type,userId }) => {
   const [dateValue, setDateValue] = useState(null);
   const [selectedTime, setSelectedTime] = useState('');
   const { userInfo: { token } } = useSelector((state) => state.auth);
@@ -16,7 +16,7 @@ const BookingModal = ({ opened, setOpened, email, propertyId, availableTimes, ti
   }
   const { mutate, isLoading } = useMutation({
     onSuccess: () => handleBookingSuccess(),
-    mutationFn: () => bookVisit(dateValue, selectedTime, propertyId, email,owner,type),
+    mutationFn: () => bookVisit(dateValue, selectedTime, propertyId, email,token,userId),
     onError: ({ response }) => toast.error(response.data.message),
     onSettled: () => setOpened(false)
   });

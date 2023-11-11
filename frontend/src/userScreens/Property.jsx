@@ -103,6 +103,7 @@ const Property = () => {
       isOpen={openChatModal} 
       onClose={modalClose}
       ownerId={data?.owner}
+      rid={data?._id}
       chatRoomId={chatRoomId}
        /> :null}
 
@@ -204,6 +205,7 @@ const Property = () => {
               setOpened={setModalOpened}
               propertyId={id}
               email={userInfo?.email}
+              userId={userInfo?._id}
               owner={data?.owner}
               timeSlots={data?.timeSlots}
               type={data?.type}
