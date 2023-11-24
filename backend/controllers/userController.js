@@ -99,12 +99,11 @@ const sendOTPByEmail = async (email, otp) => {
             text:` Your OTP for verification is: ${otp}`,
         }
         transporter.sendMail(options,(err,info)=>{
-            if(err){
-                console.log("Email not sent");
-                console.log(err);
-            }else{
-                console.log("Email sent successfully");
-            }
+          if (err) {
+            console.log("Email not sent:", err);
+          } else {
+            console.log("Email sent successfully:", info.response);
+          }
         });
       }catch(err){
         console.log(err);
