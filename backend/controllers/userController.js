@@ -31,6 +31,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const { name, email, number, password } = req.body;
 
   const userExists = await User.findOne({ email });
+  console.log("suiiiiiiiiiii dd")
 
   if (userExists) {
     res.status(400);
@@ -52,6 +53,7 @@ const registerUser = asyncHandler(async (req, res) => {
     otp,
 
   });
+  console.log("suiiiiiiiiiii mm")
 
   res.status(200).json({ message: 'Register user' })
 });
@@ -61,23 +63,52 @@ const registerUser = asyncHandler(async (req, res) => {
 
 
 const sendOTPByEmail = async (email, otp) => {
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-      user: process.env.ETHEREAL_EMAIL,
-      pass: process.env.ETHEREAL_PASSWORD
-    }
-  })
+  // const transporter = nodemailer.createTransport({
+  //   host: 'smtp.ethereal.email',
+  //   port: 587,
+  //   auth: {
+  //     user: process.env.ETHEREAL_EMAIL,
+  //     pass: process.env.ETHEREAL_PASSWORD
+  //   }
+  // })
 
-  const mailOptions = {
-    from: process.env.ETHEREAL_EMAIL,
-    to: email,
-    subject: 'OTP Verification',
-    text: ` Your OTP for verification is: ${otp}`,
-  };
+  // const mailOptions = {
+  //   from: process.env.ETHEREAL_EMAIL,
+  //   to: email,
+  //   subject: 'OTP Verification',
+  //   text: ` Your OTP for verification is: ${otp}`,
+  // };
 
-  await transporter.sendMail(mailOptions);
+  // await transporter.sendMail(mailOptions);
+  try{
+        console.log("suiiiiiiiiiii")
+        const transporter = nodemailer.createTransport({
+            host:process.env.HOST,
+            service:process.env.SERVICE,
+            port:Number(process.env.EMAIL_PORT),
+            secure:Boolean(process.env.SECURE),
+            auth:{
+                user:process.env.USER,
+                pass:process.env.PASS,
+            }
+        });
+        const options = {
+            from:process.env.USER,
+            to:email,
+            subject:'OTP Verification',
+            text:` Your OTP for verification is: ${otp}`,
+        }
+        transporter.sendMail(options,(err,info)=>{
+            if(err){
+                console.log("Email not sent");
+                console.log(err);
+            }else{
+                console.log("Email sent successfully");
+            }
+        });
+      }catch(err){
+        console.log(err);
+      }
 };
 
 
