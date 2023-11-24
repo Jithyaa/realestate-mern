@@ -86,7 +86,9 @@ const sendOTPByEmail = async (email, otp) => {
             host:process.env.HOST,
             service:process.env.SERVICE,
             port:Number(process.env.EMAIL_PORT),
-            secure:Boolean(process.env.SECURE),
+            secure:false,
+            requireTLS: true,
+
             auth:{
                 user:process.env.USER,
                 pass:process.env.PASS,
