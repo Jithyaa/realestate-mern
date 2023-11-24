@@ -21,12 +21,14 @@ const BasicDetails = ({ prevStep, nextStep, propertyDetails, setPropertyDetails 
         validate: {
             title: (value) => validateString(value),
             description: (value) => validateString(value),
-            priceValue: (value) => isNaN(value) ? "Price must be a number " : null,
-        },
-    });
-
-    console.log("🥶🥶🥶🥶🥶🥶🥶🥶🥶", priceValue);
-    console.log("☠️☠️☠️☠️☠️☠️☠️☠️☠️", priceUnit);
+            priceValue: (value) => {
+                if (isNaN(value) || Number(value) < 0) {
+                  return "Enter a valid number";
+                }
+                return null;
+              },
+            },
+          });
 
     const { title, description, type, price } = form.values
 
@@ -68,7 +70,7 @@ const BasicDetails = ({ prevStep, nextStep, propertyDetails, setPropertyDetails 
                     withAsterisk
                     label='Price Value'
                     placeholder='0'
-                    min={0}
+                    // min={0}
                     {...form.getInputProps("priceValue")}
                     value={form.values.priceValue} // Use form values to control the input value
                     onChange={(newValue) => {

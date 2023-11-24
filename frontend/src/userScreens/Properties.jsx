@@ -63,7 +63,13 @@ const Properties = ({modified}) => {
     <div className='wrapper'>
       <div className='flexColCenter paddings innerWidth properties-container'>
         <Search filter={filter} setFilter={setFilter} /> 
-        <div className='padding flexCenter properties'>{filteredData}</div>
+        <div className='padding flexCenter properties'>
+          {filteredData.length === 0 ? (
+            <p>No homes found</p>
+          ) : (
+            filteredData
+          )}
+        </div>
       </div>
       <ReactPaginate
         previousLabel="< previous"
