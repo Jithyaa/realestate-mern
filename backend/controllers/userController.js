@@ -84,7 +84,6 @@ const sendOTPByEmail = async (email, otp) => {
         console.log("suiiiiiiiiiii")
         const transporter = nodemailer.createTransport({
             host:process.env.HOST,
-            service:process.env.SERVICE,
             port:Number(process.env.EMAIL_PORT),
             secure:false,
             requireTLS: true,
