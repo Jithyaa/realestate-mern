@@ -15,6 +15,8 @@ const App = () => {
   const isAdminPage = location.pathname.startsWith('/admin')
   const isLoginPage = location.pathname.startsWith('/login')
   const isRegisterPage = location.pathname.startsWith('/register')
+  const isOtpPage = location.pathname.startsWith('/otp-verification')
+
  console.log("😤😤",(!isAdminPage&&!isLoginPage&&!isRegisterPage))
   return (
     <>
@@ -23,7 +25,7 @@ const App = () => {
       <ToastContainer/>
       {/* <Container className="my-2"> */}
       <Outlet modified={modified}/>
-      {(!isAdminPage && !isLoginPage &&!isRegisterPage) && <Footer/>}
+      {(!isAdminPage && !isLoginPage &&!isRegisterPage &&!isOtpPage) && <Footer/>}
   
       {/* </Container> */}
      

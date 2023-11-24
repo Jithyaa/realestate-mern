@@ -71,7 +71,7 @@ const Properties = ({modified}) => {
           )}
         </div>
       </div>
-      <ReactPaginate
+      {/* <ReactPaginate
         previousLabel="< previous"
         nextLabel="next >"
         onPageChange={handlePageClick}
@@ -81,7 +81,7 @@ const Properties = ({modified}) => {
         previousClassName="pagination-previous"
         nextClassName="pagination-next"
         pageClassName="pagination-page"
-      />
+      /> */}
     </div>
   );
 };

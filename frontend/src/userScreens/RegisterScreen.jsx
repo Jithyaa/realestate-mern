@@ -18,6 +18,7 @@ const RegisterScreen = () => {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const [register, { isLoading }] = useRegisterMutation();
+  const [passwordError, setPasswordError] = useState('');
 
   useEffect(() => {
     if (userInfo) {
@@ -29,6 +30,8 @@ const RegisterScreen = () => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
+    } else if (!validatePassword(password)) {
+      toast.error('Password must be at least 6 characters, include one uppercase letter, and one number');
     } else {
       try {
         const res = await register({ name, email, number, password }).unwrap();
@@ -56,6 +59,11 @@ const RegisterScreen = () => {
     }
   };
 
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+    return passwordRegex.test(password);
+  };
+
 
   return (
     <div className="register-container">
@@ -76,7 +84,7 @@ const RegisterScreen = () => {
             onChange={handleEmailChange}
             required
           />
-          {emailError && <p>{emailError}</p> }
+          {emailError && <p style={{color:'white'}}>{emailError}</p> }
           <input
             type="text"
             placeholder="Number"
@@ -88,9 +96,17 @@ const RegisterScreen = () => {
             type="password"
             placeholder="Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (!validatePassword(e.target.value)) {
+                setPasswordError('Password must be at least 6 characters, include one uppercase letter, and one number');
+              } else {
+                setPasswordError('');
+              }
+            }}
             required
           />
+        {passwordError && <p style={{ color: 'white' }}>{passwordError}</p>}
           <input
             type="password"
             placeholder="Confirm Password"
@@ -99,7 +115,7 @@ const RegisterScreen = () => {
             required
           />
           {isLoading && <Loader />}
-          <button type="submit" disabled={!!emailError}>SIGN UP</button>
+          <button type="submit" disabled={!!emailError || !!passwordError}>SIGN UP</button>
         </form>
         <p style={{ color: 'black' }} className="py-3"><b>Already have an account? </b>
           <Link style={{color:'white'}} to="/login"><b>SIGN IN</b></Link>

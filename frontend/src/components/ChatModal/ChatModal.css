@@ -187,3 +187,6 @@
   height: 100%;
   object-fit: cover;
 }
+.chat-room.selected-room {
+  border: solid 2px rgb(1, 250, 105); /* Change the border color to blue for the selected room */
+}

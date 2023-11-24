@@ -10,6 +10,7 @@ function check(id,obj){
   }else if(id == obj.ownerId._id){
     return obj.userId.name
   }
+   return '';
 }
 const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId ,rid}) => {
   const [socket, setSocket] = useState(null);
@@ -17,6 +18,7 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId ,rid}) => {
   const [messageInput, setMessageInput] = useState('');
   const [chatRooms, setChatRooms] = useState([])
   const [currentRoomId, setCurrentRoomId] = useState()
+  const [selectedRoomId, setSelectedRoomId] = useState(null);
   const { userInfo } = useSelector((state) => state.auth);
 
 
@@ -55,7 +57,8 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId ,rid}) => {
 
   const handleRoom = (id) => {
     setCurrentRoomId(id)
-
+    setSelectedRoomId(id);
+   socket.emit('joinRoom', id);
   };
 
   useEffect(() => {
@@ -74,13 +77,16 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId ,rid}) => {
       <div className="chat-modal-content">
         <div className="chat-header">
           {chatRooms.length > 0 && chatRooms.map(ele => (
-            <div className='chat-room' key={ele._id} onClick={() => handleRoom(ele._id)}>
-              <div className='chat-room-img'>
-                <img src={ele.residencyId.images[0]} alt="" />
-              </div>
-              {/* <p>{ele.residencyId.title}</p> */}
-              <p>{check(userInfo?._id,ele)}</p>
+            <div
+            className={`chat-room ${selectedRoomId === ele._id ? 'selected-room' : ''}`}
+            key={ele._id}
+            onClick={() => handleRoom(ele._id)}
+          >
+            <div className='chat-room-img'>
+              <img src={ele.residencyId.images[0]} alt="" />
             </div>
+            <p>{check(userInfo?._id, ele)}</p>
+          </div>
           ))}
         </div>
 
