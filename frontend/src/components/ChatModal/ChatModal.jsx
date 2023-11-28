@@ -5,10 +5,10 @@ import { io } from 'socket.io-client'
 import { useSelector } from 'react-redux';
 import { addMessage, rooms, showMessages } from '../../utils/api';
 function check(id,obj){
-  if(id == obj.userId._id){
-    return obj.ownerId.name
-  }else if(id == obj.ownerId._id){
-    return obj.userId.name
+  if(id == obj.userId?._id){
+    return obj.ownerId?.name
+  }else if(id == obj.ownerId?._id){
+    return obj.userId?.name
   }
    return '';
 }
@@ -24,7 +24,7 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId ,rid}) => {
 
   useEffect(() => {
     async function run() {
-      setChatRooms(await rooms(userInfo._id,rid))
+      setChatRooms(await rooms(userInfo?._id,rid))
     }
     run()
     const newSocket = io(import.meta.env.VITE_SERVER_URL, { transports: ['websocket'] });
@@ -71,6 +71,8 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId ,rid}) => {
     }
 
   }, [currentRoomId])
+  console.log("😤😤😤",chatMessages);
+  console.log("😤😤😤⭐⭐",chatRooms);
 
   return (
     <div className={`chat-modal ${isOpen ? 'open' : ''}`}>
@@ -78,9 +80,9 @@ const ChatModal = ({ isOpen, onClose, ownerId, chatRoomId ,rid}) => {
         <div className="chat-header">
           {chatRooms.length > 0 && chatRooms.map(ele => (
             <div
-            className={`chat-room ${selectedRoomId === ele._id ? 'selected-room' : ''}`}
-            key={ele._id}
-            onClick={() => handleRoom(ele._id)}
+            className={`chat-room ${selectedRoomId === ele?._id ? 'selected-room' : ''}`}
+            key={ele?._id}
+            onClick={() => handleRoom(ele?._id)}
           >
             <div className='chat-room-img'>
               <img src={ele.residencyId.images[0]} alt="" />
